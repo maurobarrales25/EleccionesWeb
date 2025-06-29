@@ -1,0 +1,92 @@
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  width: 100%;
+  height: 5rem;
+  font-size: 1em;
+  font-weight: 400;
+  background-color: #25418E;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+  /* fuente por defecto para todo en la navbar */
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Oxygen-Sans', Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar-logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo {
+  height: 4.5rem;
+}
+
+.navbar-logo-text {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-title {
+  font-size: 1.5rem;
+  font-family: 'Sora', 'Open Sans', sans-serif;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navbar-menu {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-menu li a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar-menu li a:hover {
+  color: #4C5C92;
+}
+
+.navbar-user-access {
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+}
+
+.navbar-user-icon {
+  color: #ffffff;
+  font-size: 1.5rem;
+}
+
+
+.navbar-user-icon:hover {
+  color: #ffffff;
+}
