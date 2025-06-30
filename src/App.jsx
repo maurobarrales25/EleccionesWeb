@@ -1,10 +1,8 @@
-import Home from './pages/Home' 
 import Login from './pages/LoginScreen/LoginScreen'
-import MenuGestionarElecciones from './pages/GestionarElecciones/MenuGestionarElecciones.jsx'
-
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
 import './App.css'
+import MainScreen from './pages/MainScreen/MainScreen';
+import EleccionesPage from './pages/EleccionesPage/EleccionesPage';
 
 function App() {
 
@@ -12,7 +10,8 @@ function App() {
     <BrowserRouter>
       <Routes> 
         <Route path="/" element={<Login />} />
-        <Route path="/MenuGestionarElecciones" element={<MenuGestionarElecciones />} />
+        <Route path="/MainScreen" element={<MainScreen/>}/>
+        <Route path='/Elecciones' element={<EleccionesPage/>}/>
       </Routes>
     </BrowserRouter>
   )

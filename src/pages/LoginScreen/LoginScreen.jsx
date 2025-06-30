@@ -6,7 +6,7 @@ import { logIn } from "@/api/apiCalls.js";
 import { useState } from "react";
 import { useUser } from "@/context/UserContext.jsx";
 
-function LoginElecciones() {
+function LoginScreen() {
   const navigate = useNavigate()
   const { setCiudadano } = useUser()
 
@@ -18,12 +18,7 @@ function LoginElecciones() {
     try {
       const response = await logIn({serie:serieCredencial, numero:numeroCredencial})
       setCiudadano(response.data)
-      
-      if (response.data.role === "user") {
-        navigate("/admin")
-      }
-
-      navigate("/admin1")
+      navigate("/MainScreen")
     }
     catch(error){
       console.error("ERROR")
@@ -63,4 +58,4 @@ function LoginElecciones() {
   );
 }
 
-export default LoginElecciones;
+export default LoginScreen;
