@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css'
 import MainScreen from './pages/MainScreen/MainScreen';
 import EleccionesPage from './pages/EleccionesPage/EleccionesPage';
+import ManageEleccion from './pages/ManageEleccion/ManageEleccion';
+import CircuitosPage from './pages/CircuitosPage/CircuitosPage';
 
 function App() {
 
@@ -12,6 +14,8 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/MainScreen" element={<MainScreen/>}/>
         <Route path='/Elecciones' element={<EleccionesPage/>}/>
+        <Route path='/ManageEleccion/:eleccionId' element={<ManageEleccion />} />
+        <Route path='/CircuitosPage/:eleccionId' element={<CircuitosPage/>}/>
       </Routes>
     </BrowserRouter>
   )
