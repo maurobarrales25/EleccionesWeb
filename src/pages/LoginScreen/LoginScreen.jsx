@@ -1,23 +1,30 @@
-import "./LoginScreen.css";
-import Logo from './escudo.png'
 import { Link } from "react-router-dom";
-import MenuGestionarElecciones from "../GestionarElecciones/MenuGestionarElecciones.jsx";
-import ButtonCustom from "../../Components/atoms/ButtonCustom.jsx";
+import ButtonCustom from "../../components/atoms/ButtonCustom/ButtonCustom.jsx";
 import { MdLock } from "react-icons/md";
 import NavBar from "../../Components/NavBar/NavBar.jsx";
 
 function LoginElecciones() {
   return (
-    <div>
+    <div className="flex flex-col min-h-screen bg-white">
       <NavBar />
-
-      <div id="loginContainer">
-        <div id="login">
-          <input type="text" placeholder="Ingresar Serie Credencial" />
-          <input type="text" placeholder="Ingresar Numero Credencial" />
-          <button id="autenticacion">AUTENTICARSE</button>
-
-          <Link to="/MenuGestionarElecciones" style={{ textDecoration: 'none' }}>
+      <div className="flex items-center justify-center h-[80vh]">
+        <div className="bg-[#3f3f4a] m-[6vh] p-[3vh] w-1/4 rounded-[2vh] flex flex-col gap-[2vh]">
+          <input
+            type="text"
+            placeholder="Ingresar Serie Credencial"
+            className="p-[1vh] text-[1.6vh] bg-[#d9d9d9] rounded"
+          />
+          <input
+            type="text"
+            placeholder="Ingresar Numero Credencial"
+            className="p-[1vh] text-[1.6vh] bg-[#d9d9d9] rounded"
+          />
+          <button
+            className="bg-[#4c5ba8] text-white font-bold p-[1vh] rounded-[1vh] cursor-pointer"
+          >
+            AUTENTICARSE
+          </button>
+          <Link to="/MenuGestionarElecciones" className="no-underline">
             <ButtonCustom
               label="Ingresar"
               size="medium"
@@ -32,4 +39,5 @@ function LoginElecciones() {
     </div>
   );
 }
+
 export default LoginElecciones;
