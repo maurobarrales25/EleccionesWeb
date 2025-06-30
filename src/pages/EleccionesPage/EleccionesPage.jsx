@@ -46,7 +46,13 @@ function EleccionesPage() {
             {elecciones.map(({ eleccionId, nombre, fecha }) => (
               <TableRow key={eleccionId}>
                 <TableCell>
-                  <Link to={`${baseLink}/${eleccionId}`} className="text-blue-600 hover:underline">
+                  <Link
+                    to={{
+                      pathname: `${baseLink}/${eleccionId}`,
+                    }}
+                    state={{ nombre }}
+                    className="text-blue-600 hover:underline"
+                  >
                     {nombre}
                   </Link>
                 </TableCell>
