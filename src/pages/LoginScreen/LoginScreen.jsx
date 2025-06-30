@@ -24,7 +24,7 @@ function LoginElecciones() {
           >
             AUTENTICARSE
           </button>
-          <Link to="/MenuGestionarElecciones" className="no-underline">
+          <Link to="/MainScreen" className="no-underline">
             <ButtonCustom
               label="Ingresar"
               size="medium"
