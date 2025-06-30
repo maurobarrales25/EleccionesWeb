@@ -10,6 +10,7 @@ import {
   TableHead,
   TableCell,
 } from "@/components/ui/table";
+import ButtonCustom from "@/components/atoms/ButtonCustom/ButtonCustom";
 
 function EleccionesPage() {
   const location = useLocation();
@@ -33,7 +34,7 @@ function EleccionesPage() {
   return (
     <div>
       <NavBar />
-      <div className="flex justify-center h-[80vh] mt-20 w-full px-4">
+      <div className="flex flex-col items-center justify-center h-[80vh] mt-20 w-max- px-4 max-h-[70vh] overflow-auto">
         <Table className="max-w-4xl">
           <TableHeader>
             <TableRow>
@@ -54,6 +55,11 @@ function EleccionesPage() {
             ))}
           </TableBody>
         </Table>
+        {baseLink === "/ManageEleccion" && (
+        <div className="mt-18">
+          <ButtonCustom label="Crear Eleccion" size="large" />
+        </div>
+       )}
       </div>
     </div>
   );

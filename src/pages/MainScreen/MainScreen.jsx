@@ -9,7 +9,7 @@ function MainScreen() {
     <div>
       <NavBar />
       <div className="flex items-center justify-center h-[80vh] gap-15">
-      {ciudadano.role === "admin" ? 
+      {ciudadano?.role === "admin" ? 
       (
         <>
           <OptionButton texto="GESTIONAR ELECCIONES" navigateTo="/Elecciones" state={{ baseLink: "/ManageEleccion" }} />
