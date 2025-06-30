@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 
-const OptionButton = ({ texto, navigateTo }) => {
+const OptionButton = ({ texto, navigateTo, state }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(navigateTo);
+    navigate(navigateTo, { state });
   };
 
   return (
