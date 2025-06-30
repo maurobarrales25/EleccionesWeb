@@ -2,8 +2,8 @@ import axios from "axios";
 
 const BASE_URL = "http://localhost:8080/"
 
-const logIn = (data) => {
-    return axios.post('logIn', data)
+export const logIn = (data) => {
+    return axios.post(BASE_URL + 'logIn', data)
 }
 
 const getElecciones = () => {
