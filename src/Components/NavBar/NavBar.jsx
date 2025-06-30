@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const NavBar = () => {
     return (
         <header className="navbar-container">
-            <Link to="/" className="navbar-left">
+            <Link to="/MainScreen" className="navbar-left">
                 <div className="logo">
                     <div className="navbar-logo-container">
                         <img src={coats} alt="Escudo de armas" className="navbar-logo" />
