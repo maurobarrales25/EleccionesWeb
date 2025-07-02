@@ -26,3 +26,13 @@ html, body, #root {
   scrollbar-width: thin;            
   scrollbar-color: #c0c0c0 #f0f0f0; 
 }
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
