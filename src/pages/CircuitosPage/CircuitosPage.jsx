@@ -1,6 +1,6 @@
 import NavBar from "@/components/NavBar/NavBar";
 import { useEffect, useState } from "react";
-import { getCircuitosByEleccion } from "@/api/apiCalls";
+import { getCircuitosByEleccion, getEstablecimientos, saveCircuito, setCircuitoToEleccion } from "@/api/apiCalls";
 import { Link, useParams } from "react-router-dom";
 import {
   Table,
@@ -11,28 +11,59 @@ import {
   TableCell,
 } from "@/components/ui/table";
 import ButtonCustom from "@/components/atoms/ButtonCustom/ButtonCustom";
+import { Popover, PopoverTrigger, PopoverContent } from "@/Components/ui/popover";
 
 function CircuitosPage() {
   const { eleccionId } = useParams();
   const [circuitos, setCircuitos] = useState([]);
+  const [establecimientos, setEstablecimientos] = useState([]);
+  const [establecimientoId, setEstablecimientoId] = useState("");
+  const [numeroCircuito, setNumeroCircuito] = useState("");
 
   useEffect(() => {
-    const fetchCircuitos = async () => {
+  const fetchCircuitos = async () => {
+    try {
+      const response = await getCircuitosByEleccion(eleccionId);
+      setCircuitos(response.data);
+    } 
+    catch (error) {
+      console.error("Error fetching circuitos:", error);
+    }
+  };
+  if (eleccionId) {
+    fetchCircuitos();
+  }
+}, [eleccionId]);
+
+  useEffect(() => {
+    const fetchEstablecimientos = async () => {
       try {
-        const response = await getCircuitosByEleccion(eleccionId);
-        setCircuitos(response.data);
+        const response = await getEstablecimientos();
+        setEstablecimientos(response.data);
       } 
       catch (error) {
-        console.error("Error fetching circuitos:", error);
+        console.error("Error fetching establecimientos:", error);
       }
     };
+    fetchEstablecimientos();
+  }, []);
 
-    if (eleccionId) fetchCircuitos();
-  }, [eleccionId]);
+  const handleCreateCircuito = async(e) => {
+    e.preventDefault()
+    try{
+        const responseSave = await saveCircuito(numeroCircuito, establecimientoId )
+        setCircuitos(prev => [...prev, responseSave.data])
+        await setCircuitoToEleccion(eleccionId, responseSave.data.circuitoId)
+    }
+    catch(error){
+        console.log("error", error)
+    }
+  }
 
   return (
     <div>
       <NavBar />
+
       <div className="flex flex-col items-center justify-center h-[80vh] mt-20 w-max- px-4 max-h-[70vh] overflow-auto">
         <Table className="max-w-4xl">
           <TableHeader>
@@ -45,18 +76,51 @@ function CircuitosPage() {
             {circuitos.map(({ circuitoId, numero, establecimientoId }) => (
               <TableRow key={circuitoId}>
                 <TableCell>
-                  <Link to={`/ManageCircuito/${eleccionId}/${circuitoId}`} className="text-blue-600 hover:underline">
+                  <Link to={`/ManageCircuito/${circuitoId}`} state={{ numero }} className="text-blue-600 hover:underline">
                     {numero}
                   </Link>
                 </TableCell>
-                <TableCell>{establecimientoId}</TableCell>
+                <TableCell>
+                  {
+                    establecimientos.find((est) => est.establecimientoId === establecimientoId)?.nombre || "Desconocido"
+                  }
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
+
         <div className="mt-18">
-          <ButtonCustom label="Crear Circuito" size="large" />
+          <Popover>
+            <PopoverTrigger asChild>
+              <ButtonCustom label="Crear Circuito" size="large" />
+            </PopoverTrigger>
+            <PopoverContent className="w-80">
+              <form onSubmit={handleCreateCircuito} className="w-full flex flex-col gap-2">
+                <input 
+                  id="numeroCircuito" 
+                  onChange={(e) => setNumeroCircuito(e.target.value)} 
+                  type="number" 
+                  required 
+                  placeholder="Ingrese numero del circuito" 
+                  className="border-4 rounded-md p-2 outline-0"
+                  />
+                <select onChange={(e) => setEstablecimientoId(e.target.value)} required defaultValue="" className="border-4 rounded-md p-2 outline-0">
+
+                  <option value="" disabled>Seleccione el establecimiento</option>
+                  {establecimientos.map((est) => (
+                    <option key={est.establecimientoId} value={est.establecimientoId}>
+                      {est.nombre}
+                    </option>
+                  ))}
+                  
+                </select>
+                <ButtonCustom label="Crear" size="small"></ButtonCustom>
+              </form>
+            </PopoverContent>
+          </Popover>
         </div>
+        
       </div>
     </div>
   );
