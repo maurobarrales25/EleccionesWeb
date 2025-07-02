@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import ButtonCustom from "../../components/atoms/ButtonCustom/ButtonCustom.jsx";
 import { MdLock } from "react-icons/md";
-import NavBar from "../../Components/NavBar/NavBar.jsx";
 import { logIn } from "@/api/apiCalls.js";
 import { useState } from "react";
 import { useUser } from "@/context/UserContext.jsx";
@@ -40,12 +39,14 @@ function LoginScreen() {
         <div className="bg-[#3f3f4a] m-[6vh] p-[3vh] w-full max-w-md rounded-[2vh]">
           <form onSubmit={handleLogin} className="flex flex-col gap-[2vh]">
             <input
+              required
               type="text"
               onChange={(e) => setSerieCredencial(e.target.value)}
               placeholder="Ingresar Serie Credencial"
               className="p-[1vh] text-[1.6vh] bg-[#d9d9d9] rounded"
             />
             <input
+              required
               type="text"
               onChange={(e) => setNumeroCredencial(e.target.value)}
               placeholder="Ingresar Numero Credencial"
