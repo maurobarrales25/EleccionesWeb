@@ -26,6 +26,12 @@
   background-color: #353E66;
 }
 
+.boton.disabled {
+  background-color: #9399b6;
+  cursor: not-allowed;
+}
+
+
 .boton.small {
   padding: 0.625rem 1rem; /* 10px 16px */
   font-size: 0.875rem; /* 14px */
