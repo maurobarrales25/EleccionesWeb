@@ -1,6 +1,6 @@
 import NavBar from "@/components/NavBar/NavBar";
 import { useEffect, useState } from "react";
-import { getElecciones } from "@/api/apiCalls";
+import { getElecciones, saveEleccion } from "@/api/apiCalls";
 import { Link, useLocation } from "react-router-dom";
 import {
   Table,
@@ -11,12 +11,15 @@ import {
   TableCell,
 } from "@/components/ui/table";
 import ButtonCustom from "@/components/atoms/ButtonCustom/ButtonCustom";
+import { Popover, PopoverTrigger, PopoverContent } from "@/Components/ui/popover";
 
 function EleccionesPage() {
   const location = useLocation();
   const baseLink = location.state?.baseLink;
 
   const [elecciones, setElecciones] = useState([]);
+  const [inputPopUpEleccion, setInputPopUpEleccion] = useState("");
+  const [selectTipoEleccion, setSelectTipoEleccion] = useState("")
 
   useEffect(() => {
     const fetchElecciones = async () => {
@@ -30,6 +33,17 @@ function EleccionesPage() {
 
     fetchElecciones();
   }, []);
+
+  const handleCreateEleccion = async(e) => {
+    e.preventDefault()
+    try{
+        const response = await saveEleccion(inputPopUpEleccion, selectTipoEleccion)
+        setElecciones(prev => [...prev, response.data])
+    }
+    catch(error){
+        console.log("error", error)
+    }
+  }
 
   return (
     <div>
@@ -63,7 +77,22 @@ function EleccionesPage() {
         </Table>
         {baseLink === "/ManageEleccion" && (
         <div className="mt-18">
-          <ButtonCustom label="Crear Eleccion" size="large" />
+          <Popover>
+            <PopoverTrigger asChild>
+              <ButtonCustom label="Crear Eleccion" size="large" />
+            </PopoverTrigger>
+            <PopoverContent className="w-80">
+              <form onSubmit={handleCreateEleccion} className="w-full flex flex-col gap-2">
+                <input id="nombreEleccion" onChange={(e) => setInputPopUpEleccion(e.target.value)} type="text" required placeholder="Ingrese nombre de la eleccion" className="border-4 rounded-md p-2 outline-0"/>
+                <select onChange={(e) => setSelectTipoEleccion(e.target.value)} required defaultValue="" className="border-4 rounded-md p-2 outline-0">
+                  <option value="" disabled>Seleccione tipo de eleccion</option>
+                  <option value="PRESIDENCIAL">PRESIDENCIAL</option>
+                  <option value="BALLOTAGE">BALLOTAGE</option>
+                </select>
+                <ButtonCustom label="Crear" size="small"></ButtonCustom>
+              </form>
+            </PopoverContent>
+          </Popover>
         </div>
        )}
       </div>
