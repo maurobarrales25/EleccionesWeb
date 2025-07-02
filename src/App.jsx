@@ -5,6 +5,7 @@ import MainScreen from './pages/MainScreen/MainScreen';
 import EleccionesPage from './pages/EleccionesPage/EleccionesPage';
 import ManageEleccion from './pages/ManageEleccion/ManageEleccion';
 import CircuitosPage from './pages/CircuitosPage/CircuitosPage';
+import ManageSearchVotarPage from './pages/ManageSearchVotarPage/ManageSearchVotarPage';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Route path='/Elecciones' element={<EleccionesPage/>}/>
         <Route path='/ManageEleccion/:eleccionId' element={<ManageEleccion />} />
         <Route path='/CircuitosPage/:eleccionId' element={<CircuitosPage/>}/>
+        <Route path='/FindCircuitoPage/:eleccionId' element={<ManageSearchVotarPage/>}></Route>
       </Routes>
     </BrowserRouter>
   )
