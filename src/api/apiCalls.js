@@ -14,6 +14,10 @@ export const getAllCircuitosByEleccion = (eleccionId) => {
   return axios.get(BASE_URL + 'circuito/getAllByEleccion', { params: { eleccionId } });
 }
 
+export const getCircuitoByCredencial = (serie, numero) => {
+    return axios.get(BASE_URL + 'credencial/circuito', { params: { serie, numero } })
+}
+
 export const saveEleccion = (nombre, tipoEleccion) => {
     return axios.post(BASE_URL + 'eleccion/save', null, {params: {nombre, tipoEleccion}})
 }
