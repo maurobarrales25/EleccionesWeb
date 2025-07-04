@@ -15,7 +15,7 @@ export const getAllCircuitosByEleccion = (eleccionId) => {
 }
 
 export const getCircuitoByCredencialEleccion = (serie, numero, eleccionId) => {
-    return axios.get(BASE_URL + `credencial/circuito/${serie}/${numero}/${eleccionId}`)
+    return axios.get(BASE_URL + `CredencialCircuito/${serie}/${numero}/${eleccionId}`)
 }
 
 export const saveEleccion = (nombre, tipoEleccion) => {
@@ -59,7 +59,7 @@ export const savePartido = () => {
 }
 
 export const getEstablecimientoById = (establecimientoId) => {
-    return axios.get(`${BASE_URL}establecimiento/getById/${establecimientoId}`);
+    return axios.get(BASE_URL + `establecimiento/getById/${establecimientoId}`);
 }
 
 export const getEstablecimientos = () => {
