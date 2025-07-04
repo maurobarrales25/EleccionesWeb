@@ -8,6 +8,7 @@ import CircuitosPage from './pages/CircuitosPage/CircuitosPage';
 import ManageSearchVotarPage from './pages/ManageSearchVotarPage/ManageSearchVotarPage';
 import ManageCircuito from './pages/ManageCircuito/ManageCircuito';
 import ManageMiembrosMesa from './pages/ManageMiembrosMesa/ManageMiembrosMesa';
+import VotarPage from './pages/VotarPage/VotarPage';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
         <Route path='/FindCircuitoPage/:eleccionId' element={<ManageSearchVotarPage/>}></Route>
         <Route path='/ManageCircuito/:circuitoId' element={<ManageCircuito/>}/>
         <Route path='/ManageMiembrosMesa/:circuitoId' element={<ManageMiembrosMesa/>}/>
+        <Route path='/VotarPage/:circuitoId' element={<VotarPage/>}/>
       </Routes>
     </BrowserRouter>
   )

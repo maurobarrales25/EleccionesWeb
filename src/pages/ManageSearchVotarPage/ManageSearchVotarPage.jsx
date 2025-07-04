@@ -13,6 +13,7 @@ export default function ManageSearchVotarPage() {
     const [ circuitosByEleccion, setCircuitosByEleccion ] = useState([])
     const [ inputNumeroCredencial, setInputNumeroCredencial ] = useState("")
     const [ establecimiento, setEstablecimiento ] = useState("")
+    const [ buttonEnabled, setButtonEnabled ] = useState("disabled")
 
     const [ booleanVotacion, setBooleanVotacion ] = useState(false)
 
@@ -20,10 +21,25 @@ export default function ManageSearchVotarPage() {
         handleGetCircuitosByEleccion()
     }, [])
 
+    const handleSubmitCredencial = async(e) => {
+        e.preventDefault()
+        try {
+            const response = await getCircuitoByCredencial(inputSerieCredencial, inputNumeroCredencial)
+            setCircuito(response.data)
+        }
+        catch(e) {
+            console.log(e, "ERROR")
+            setButtonEnabled("disabled")
+            setCircuito({})
+            setEstablecimiento("")
+        }
+    }
+
     useEffect(() => {
         if (Object.keys(circuito).length > 0) {
             const encontrado = circuitosByEleccion.find(e => e.circuitoId === circuito.circuitoId)
             console.log("Circuito encontrado:", encontrado)
+            setButtonEnabled("active")
             
             handleGetEstablecimiento()
         }
@@ -37,17 +53,6 @@ export default function ManageSearchVotarPage() {
     const handleGetEstablecimiento = async() => {
         const responseEstablecimiento = await getEstablecimientoById(circuito.establecimientoId)
         setEstablecimiento(responseEstablecimiento.data)
-    }
-
-    const handleSubmitCredencial = async(e) => {
-        e.preventDefault()
-        try {
-            const response = await getCircuitoByCredencial(inputSerieCredencial, inputNumeroCredencial)
-            setCircuito(response.data)
-        }
-        catch(e) {
-            console.log(e, "ERROR")
-        }
     }
 
     return (
@@ -100,7 +105,9 @@ export default function ManageSearchVotarPage() {
                 </Table>
             </div>
             <div className="mt-20 flex items-center justify-center">
-                <ButtonCustom label="Votar" size="medium"/>
+                <Link to={`/VotarPage/${eleccionId}`}>
+                    <ButtonCustom label="Seleccionar Lista" size={buttonEnabled} />
+                </Link>    
             </div>
         </div>
   )
