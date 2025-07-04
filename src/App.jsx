@@ -22,9 +22,11 @@ function App() {
         <Route path='/ManageEleccion/:eleccionId' element={<ManageEleccion />} />
         <Route path='/CircuitosPage/:eleccionId' element={<CircuitosPage/>}/>
         <Route path='/FindCircuitoPage/:eleccionId' element={<ManageSearchVotarPage/>}></Route>
-        <Route path='/ManageCircuito/:circuitoId' element={<ManageCircuito/>}/>
-        <Route path='/ManageMiembrosMesa/:circuitoId' element={<ManageMiembrosMesa/>}/>
+        <Route path='/ManageCircuito/:eleccionId/:numero' element={<ManageCircuito/>}/>
+        <Route path='/ManageMiembrosMesa/:eleccionId/:numero' element={<ManageMiembrosMesa/>}/>
         <Route path='/VotarPage/:circuitoId' element={<VotarPage/>}/>
+        <Route path='/ManageCircuito/:eleccionId/:numero' element={<ManageCircuito/>}/>
+        <Route path='/ManageMiembrosMesa/:eleccionId/:numero' element={<ManageMiembrosMesa/>}/>
         <Route path='/ResultsPage/:eleccionId' element={<ResultadosPage/>}/>
       </Routes>
     </BrowserRouter>
