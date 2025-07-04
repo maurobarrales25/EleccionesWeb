@@ -10,8 +10,8 @@ export const getElecciones = () => {
     return axios.get(BASE_URL + 'eleccion/all')
 }
 
-export const getCircuitosByEleccion = (eleccionId) => {
-  return axios.get(BASE_URL + 'circuito/getByEleccion', { params: { eleccionId } });
+export const getAllCircuitosByEleccion = (eleccionId) => {
+  return axios.get(BASE_URL + 'circuito/getAllByEleccion', { params: { eleccionId } });
 }
 
 export const saveEleccion = (nombre, tipoEleccion) => {
@@ -22,20 +22,16 @@ export const getListasByEleccion = (eleccionId) => {
     return axios.get(BASE_URL + 'lista/all', {params: { eleccionId } })
 }
 
-export const saveCircuito = (numero, establecimientoId) => {
-    return axios.post(BASE_URL + 'circuito/save', null, {params: { numero, establecimientoId } })
+export const saveCircuito = (eleccionId, numero, establecimientoId) => {
+    return axios.post(BASE_URL + 'circuito/save', null, {params: {eleccionId, numero, establecimientoId } })
 }
 
-export const setCircuitoToEleccion = (eleccionId, circuitoId) => {
-    return axios.post(BASE_URL + 'circuito/eleccion-circuito', null, {params: { eleccionId, circuitoId } })
+export const getCircuitoById = (eleccionId, numero) => {
+    return axios.get(BASE_URL + 'circuito/getById', {params: {eleccionId, numero} });
 }
 
-export const getCircuitoById = (circuitoId) => {
-    return axios.get(`${BASE_URL}circuito/getById/${circuitoId}`);
-}
-
-export const addMiembrosMesaToCircuito = (presidenteMesaCI, secretarioMesaCI, vocalMesaCI, circuitoId) => {
-    return axios.post(BASE_URL + 'circuito/addMiembrosMesa', null, {params: { presidenteMesaCI, secretarioMesaCI, vocalMesaCI, circuitoId } })
+export const addMiembrosMesaToCircuito = (presidenteMesaCI, secretarioMesaCI, vocalMesaCI, eleccionId, numero) => {
+    return axios.post(BASE_URL + 'circuito/addMiembrosMesa', null, {params: { presidenteMesaCI, secretarioMesaCI, vocalMesaCI, eleccionId, numero } })
 }
 
 export const getPresidenteMesaByCI = (cedulaIdentidad) => {

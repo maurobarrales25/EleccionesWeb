@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 function ManageMiembrosMesa() {
-  const { circuitoId } = useParams();
+  const { eleccionId, numero } = useParams();
 
   const [presidenteCI, setPresidenteCI] = useState("");
   const [secretarioCI, setSecretarioCI] = useState("");
@@ -27,8 +27,10 @@ function ManageMiembrosMesa() {
 
   const fetchMiembrosMesa = async () => {
     try {
-      const responseCircuito = await getCircuitoById(circuitoId);
+      const responseCircuito = await getCircuitoById(eleccionId, numero);
+      console.log("Circuito response:", responseCircuito.data);
       const responsePresidente = await getPresidenteMesaByCI(responseCircuito.data.presidenteMesaCI);
+      console.log("Presidente response:", responsePresidente.data);
       const responseSecretario = await getSecretarioMesaByCI(responseCircuito.data.secretarioMesaCI);
       const responseVocal = await getVocalMesaByCI(responseCircuito.data.vocalMesaCI);
 
@@ -43,12 +45,12 @@ function ManageMiembrosMesa() {
 
   useEffect(() => {
     fetchMiembrosMesa();
-  }, [circuitoId]);
+  }, [eleccionId, numero]);
 
   const handleAddMiembrosMesaToCircuito = async (e) => {
     e.preventDefault();
     try {
-      await addMiembrosMesaToCircuito(presidenteCI, secretarioCI, vocalCI, circuitoId);
+      await addMiembrosMesaToCircuito(presidenteCI, secretarioCI, vocalCI, eleccionId, numero);
       await fetchMiembrosMesa(); 
     } 
     catch (error) {

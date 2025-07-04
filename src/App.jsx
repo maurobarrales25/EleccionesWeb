@@ -18,8 +18,8 @@ function App() {
         <Route path='/Elecciones' element={<EleccionesPage/>}/>
         <Route path='/ManageEleccion/:eleccionId' element={<ManageEleccion />} />
         <Route path='/CircuitosPage/:eleccionId' element={<CircuitosPage/>}/>
-        <Route path='/ManageCircuito/:circuitoId' element={<ManageCircuito/>}/>
-        <Route path='/ManageMiembrosMesa/:circuitoId' element={<ManageMiembrosMesa/>}/>
+        <Route path='/ManageCircuito/:eleccionId/:numero' element={<ManageCircuito/>}/>
+        <Route path='/ManageMiembrosMesa/:eleccionId/:numero' element={<ManageMiembrosMesa/>}/>
       </Routes>
     </BrowserRouter>
   )

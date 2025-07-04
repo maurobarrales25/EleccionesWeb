@@ -1,6 +1,6 @@
 import NavBar from "@/components/NavBar/NavBar";
 import { useEffect, useState } from "react";
-import { getCircuitosByEleccion, getEstablecimientos, saveCircuito, setCircuitoToEleccion } from "@/api/apiCalls";
+import { getAllCircuitosByEleccion, getEstablecimientos, saveCircuito } from "@/api/apiCalls";
 import { Link, useParams } from "react-router-dom";
 import {
   Table,
@@ -21,19 +21,19 @@ function CircuitosPage() {
   const [numeroCircuito, setNumeroCircuito] = useState("");
 
   useEffect(() => {
-  const fetchCircuitos = async () => {
-    try {
-      const response = await getCircuitosByEleccion(eleccionId);
-      setCircuitos(response.data);
-    } 
-    catch (error) {
-      console.error("Error fetching circuitos:", error);
+    const fetchCircuitos = async () => {
+      try {
+        const response = await getAllCircuitosByEleccion(eleccionId);
+        setCircuitos(response.data);
+      } 
+      catch (error) {
+        console.error("Error fetching circuitos:", error);
+      }
+    };
+    if (eleccionId) {
+      fetchCircuitos();
     }
-  };
-  if (eleccionId) {
-    fetchCircuitos();
-  }
-}, [eleccionId]);
+  }, [eleccionId]);
 
   useEffect(() => {
     const fetchEstablecimientos = async () => {
@@ -51,9 +51,8 @@ function CircuitosPage() {
   const handleCreateCircuito = async(e) => {
     e.preventDefault()
     try{
-        const responseSave = await saveCircuito(numeroCircuito, establecimientoId )
+        const responseSave = await saveCircuito(eleccionId, numeroCircuito, establecimientoId )
         setCircuitos(prev => [...prev, responseSave.data])
-        await setCircuitoToEleccion(eleccionId, responseSave.data.circuitoId)
     }
     catch(error){
         console.log("error", error)
@@ -64,7 +63,7 @@ function CircuitosPage() {
     <div>
       <NavBar />
 
-      <div className="flex flex-col items-center justify-center h-[80vh] mt-20 w-max- px-4 max-h-[70vh] overflow-auto">
+      <div className="flex flex-col items-center justify-center h-[80vh] mt-20 px-4 max-h-[70vh] overflow-auto">
         <Table className="max-w-4xl">
           <TableHeader>
             <TableRow>
@@ -73,10 +72,10 @@ function CircuitosPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {circuitos.map(({ circuitoId, numero, establecimientoId }) => (
-              <TableRow key={circuitoId}>
+            {circuitos.map(({ eleccionId, numero, establecimientoId }) => (
+              <TableRow key={eleccionId + numero}>
                 <TableCell>
-                  <Link to={`/ManageCircuito/${circuitoId}`} state={{ numero }} className="text-blue-600 hover:underline">
+                  <Link to={`/ManageCircuito/${eleccionId}/${numero}`} className="text-blue-600 hover:underline">
                     {numero}
                   </Link>
                 </TableCell>
@@ -113,7 +112,7 @@ function CircuitosPage() {
                       {est.nombre}
                     </option>
                   ))}
-                  
+
                 </select>
                 <ButtonCustom label="Crear" size="small"></ButtonCustom>
               </form>
