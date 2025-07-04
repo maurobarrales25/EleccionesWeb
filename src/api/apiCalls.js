@@ -11,11 +11,11 @@ export const getElecciones = () => {
 }
 
 export const getCircuitosByEleccion = (eleccionId) => {
-  return axios.get(BASE_URL + 'circuito/getByEleccion', { params: { eleccionId } });
+  return axios.get(BASE_URL + 'circuito/getAllByEleccion', { params: { eleccionId } });
 }
 
-export const getCircuitoByCredencial = (serie, numero) => {
-    return axios.get(BASE_URL + 'credencial/circuito', { params: { serie, numero } })
+export const getCircuitoByCredencialEleccion = (serie, numero, eleccionId) => {
+    return axios.get(BASE_URL + `credencial/circuito/${serie}/${numero}/${eleccionId}`)
 }
 
 export const saveEleccion = (nombre, tipoEleccion) => {

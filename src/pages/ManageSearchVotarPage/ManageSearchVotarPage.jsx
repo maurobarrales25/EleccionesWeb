@@ -24,7 +24,7 @@ export default function ManageSearchVotarPage() {
     const handleSubmitCredencial = async(e) => {
         e.preventDefault()
         try {
-            const response = await getCircuitoByCredencial(inputSerieCredencial, inputNumeroCredencial)
+            const response = await getCircuitoByCredencial(inputSerieCredencial, inputNumeroCredencial, eleccionId)
             setCircuito(response.data)
         }
         catch(e) {

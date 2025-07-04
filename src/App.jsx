@@ -9,6 +9,7 @@ import ManageSearchVotarPage from './pages/ManageSearchVotarPage/ManageSearchVot
 import ManageCircuito from './pages/ManageCircuito/ManageCircuito';
 import ManageMiembrosMesa from './pages/ManageMiembrosMesa/ManageMiembrosMesa';
 import VotarPage from './pages/VotarPage/VotarPage';
+import ResultadosPage from './pages/ResultadosPage/ResultadosPage';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
         <Route path='/ManageCircuito/:circuitoId' element={<ManageCircuito/>}/>
         <Route path='/ManageMiembrosMesa/:circuitoId' element={<ManageMiembrosMesa/>}/>
         <Route path='/VotarPage/:circuitoId' element={<VotarPage/>}/>
+        <Route path='/ResultsPage/:eleccionId' element={<ResultadosPage/>}/>
       </Routes>
     </BrowserRouter>
   )
