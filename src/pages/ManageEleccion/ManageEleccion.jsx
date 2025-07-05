@@ -43,16 +43,18 @@ function ManageEleccion() {
         <Link to={`/CircuitosPage/${eleccionId}`}>
             <ButtonCustom label="Gestionar Circuitos" size="large" disabled={habilitado !== true}/>
         </Link>
-        <ButtonCustom label="Gestionar Listas" size="large" disabled={habilitado !== true}/>
+        <Link to ={`/ManageList/${eleccionId}`}>
+          <ButtonCustom label="Gestionar Listas" size="large" disabled={habilitado !== true}/>
+        </Link>
         <Link to={`/ManagePartidoPolitico/${eleccionId}`}>
-        <ButtonCustom 
-            label={
-                <label>
-                Gestionar Partidos <br /> Políticos
-                </label>
-            } 
-            size="large" 
-            disabled={habilitado !== true}
+          <ButtonCustom 
+              label={
+                  <label>
+                  Gestionar Partidos <br /> Políticos
+                  </label>
+              }   
+              size="large" 
+              disabled={habilitado !== true}
             />
         </Link>
         <ButtonCustom label="Gestionar Candidatos" size="large" disabled={habilitado !== true}/>
