@@ -15,7 +15,7 @@ export const getEleccionById = (eleccionId) => {
 }
 
 export const updateEleccionHabilitado = (eleccionId, habilitado) => {
-    return axios.post(BASE_URL + 'eleccion/updateHabilitado', null, {params: { eleccionId, habilitado } })
+    return axios.post(BASE_URL + 'eleccion/updateHabilitado', null, { params: { eleccionId, habilitado } })
 }
 
 export const getAllCircuitosByEleccion = (eleccionId) => {
@@ -43,7 +43,7 @@ export const getCircuitoById = (eleccionId, numero) => {
 }
 
 export const updateCircuitoHabilitado = (eleccionId, numero, habilitado) => {
-    return axios.post(BASE_URL + 'circuito/updateHabilitado', null, {params: { eleccionId, numero, habilitado } })
+    return axios.post(BASE_URL + 'circuito/updateHabilitado', null, { params: { eleccionId, numero, habilitado } })
 }
 
 export const addMiembrosMesaToCircuito = (presidenteMesaCI, secretarioMesaCI, vocalMesaCI, eleccionId, numero) => {
@@ -101,8 +101,8 @@ export const getListasPoliticos = (eleccionId) => {
     return axios.get(`${BASE_URL}listaPolitico/eleccion/${eleccionId}`);
 };
 
-export const saveListaPolitico = (listaDTO) => {
-    return axios.post(`${BASE_URL}listaPolitico`, listaDTO);
+export const saveListaPolitico = (eleccionId, numero, departamentoId, cedulaIdentidad) => {
+    return axios.post(BASE_URL + "/listaPolitico/save", null, {params: {eleccionId, numero, departamentoId, cedulaIdentidad} });
 };
 
 export const getCargos = () => {
