@@ -38,9 +38,10 @@ function ManageList() {
     const handleAddLista = async (e) => {
         e.preventDefault();
         try {
-            saveLista(eleccionId, departamentoId, numeroLista);
-            await fetchData();
-        } catch (error) {
+            const responseSave = await saveLista(eleccionId, departamentoId, numeroLista);
+            setListas(prev => [...prev, responseSave.data])
+        } 
+        catch (error) {
             console.error("Error al agregar lista:", error);
         }
     };
@@ -63,8 +64,9 @@ function ManageList() {
                     </TableHeader>
                     <TableBody>
                         {listas.map((lista) => (
-                            <TableRow key={lista.listaId}>
-                                <TableCell>{lista.numeroLista}</TableCell>
+                            
+                            <TableRow key={`${lista.eleccionId}-${lista.departamentoId}-${lista.numero}`}>
+                                <TableCell>{lista.numero}</TableCell>
                                 <TableCell>{getDepartamentoNombre(lista.departamentoId)}</TableCell>
                             </TableRow>
                         ))}
