@@ -31,7 +31,6 @@ export const saveEleccion = (nombre, tipoEleccion) => {
 }
 
 export const getListasByEleccion = (eleccionId) => {
-    return axios.get(BASE_URL + `listaPolitico/eleccion/${eleccionId}`)
     return axios.get(BASE_URL + 'lista/all', { params: { eleccionId } })
 }
 

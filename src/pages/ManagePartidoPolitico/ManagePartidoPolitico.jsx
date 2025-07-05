@@ -11,11 +11,9 @@ import ButtonCustom from "@/Components/atoms/ButtonCustom/ButtonCustom";
 import { Popover, PopoverTrigger, PopoverContent } from "@/Components/ui/popover";
 import { getPartidos, getCiudadanos, savePartido } from "@/api/apiCalls";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 
 
 function ManagePartidoPolitico() {
-    const { eleccionId } = useParams();
     const [partidosPoliticos, setPartidosPoliticos] = useState([]);
     const [ciudadanos, setCiudadanos] = useState([]);
 
