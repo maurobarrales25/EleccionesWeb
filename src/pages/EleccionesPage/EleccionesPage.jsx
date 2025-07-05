@@ -62,7 +62,7 @@ function EleccionesPage() {
             {elecciones.map(({ eleccionId, nombre, fecha, habilitado }) => (
               <TableRow key={eleccionId}>
                 <TableCell>
-                  {baseLink === "/ManageEleccion" ? (
+                  {baseLink != "/FindCircuitoPage" ? (
                     <Link
                       to={{
                         pathname: `${baseLink}/${eleccionId}`,
@@ -107,7 +107,7 @@ function EleccionesPage() {
             <PopoverTrigger asChild>
               <ButtonCustom label="Crear Eleccion" size="large" />
             </PopoverTrigger>
-            <PopoverContent className="w-80">
+            <PopoverContent className="w-80 flex flex-col items-center shadow-2xl border-2 border-blue-900">
               <form onSubmit={handleCreateEleccion} className="w-full flex flex-col gap-2">
                 <input id="nombreEleccion" onChange={(e) => setInputPopUpEleccion(e.target.value)} type="text" required placeholder="Ingrese nombre de la eleccion" className="border-4 rounded-md p-2 outline-0"/>
                 <select onChange={(e) => setSelectTipoEleccion(e.target.value)} required defaultValue="" className="border-4 rounded-md p-2 outline-0">

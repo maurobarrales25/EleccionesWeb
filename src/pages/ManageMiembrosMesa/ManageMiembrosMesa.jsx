@@ -103,7 +103,7 @@ function ManageMiembrosMesa() {
             <PopoverTrigger asChild>
               <ButtonCustom disabled={presidente && secretario && vocal}  label="Agregar Miembros" size="large" />
             </PopoverTrigger>
-            <PopoverContent className="w-80">
+            <PopoverContent className="w-80 flex flex-col items-center shadow-2xl border-2 border-blue-900">
               <form onSubmit={handleAddMiembrosMesaToCircuito} className="w-full flex flex-col gap-2">
                 <input
                   id="presidenteCI"

@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/table";
 import ButtonCustom from "@/components/atoms/ButtonCustom/ButtonCustom";
 import { Popover, PopoverTrigger, PopoverContent } from "@/Components/ui/popover";
-import { BsCircleFill } from "react-icons/bs";
 
 function CircuitosPage() {
   const { eleccionId } = useParams();
@@ -100,12 +99,12 @@ function CircuitosPage() {
           </TableBody>
         </Table>
 
-        <div className="mt-18">
+        <div className="mt-18 ">
           <Popover>
             <PopoverTrigger asChild>
               <ButtonCustom label="Crear Circuito" size="large" />
             </PopoverTrigger>
-            <PopoverContent className="w-80">
+            <PopoverContent className="w-80 flex flex-col items-center shadow-2xl border-2 border-blue-900">
               <form onSubmit={handleCreateCircuito} className="w-full flex flex-col gap-2">
                 <input 
                   id="numeroCircuito" 
