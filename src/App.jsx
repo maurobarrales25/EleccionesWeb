@@ -28,7 +28,7 @@ function App() {
         <Route path='/ManageMiembrosMesa/:eleccionId/:numero' element={<ManageMiembrosMesa/>}/>
         <Route path='/ManagePartidoPolitico/:eleccionId' element={<ManagePartidoPolitico/>} />
         <Route path='/ManageCandidato/:eleccionId' element={<ManageCandidato/>} />
-        <Route path='/VotarPage/:circuitoId' element={<VotarPage/>}/>
+        <Route path='/VotarPage/:eleccionId/:circuitoNumero' element={<VotarPage/>}/>
         <Route path='/ManageCircuito/:eleccionId/:numero' element={<ManageCircuito/>}/>
         <Route path='/ManageMiembrosMesa/:eleccionId/:numero' element={<ManageMiembrosMesa/>}/>
         <Route path='/ResultsPage/:eleccionId' element={<ResultadosPage/>}/>

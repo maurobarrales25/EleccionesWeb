@@ -10,6 +10,14 @@ export const getElecciones = () => {
     return axios.get(BASE_URL + 'eleccion/all')
 }
 
+export const getEleccionById = (eleccionId) => {
+    return axios.get(`${BASE_URL}eleccion/${eleccionId}`);
+}
+
+export const updateEleccionHabilitado = (eleccionId, habilitado) => {
+    return axios.post(BASE_URL + 'eleccion/updateHabilitado', null, {params: { eleccionId, habilitado } })
+}
+
 export const getAllCircuitosByEleccion = (eleccionId) => {
     return axios.get(BASE_URL + 'circuito/getAllByEleccion', { params: { eleccionId } });
 }
@@ -23,6 +31,7 @@ export const saveEleccion = (nombre, tipoEleccion) => {
 }
 
 export const getListasByEleccion = (eleccionId) => {
+    return axios.get(BASE_URL + `listaPolitico/eleccion/${eleccionId}`)
     return axios.get(BASE_URL + 'lista/all', { params: { eleccionId } })
 }
 
@@ -32,6 +41,10 @@ export const saveCircuito = (eleccionId, numero, establecimientoId) => {
 
 export const getCircuitoById = (eleccionId, numero) => {
     return axios.get(BASE_URL + 'circuito/getById', { params: { eleccionId, numero } });
+}
+
+export const updateCircuitoHabilitado = (eleccionId, numero, habilitado) => {
+    return axios.post(BASE_URL + 'circuito/updateHabilitado', null, {params: { eleccionId, numero, habilitado } })
 }
 
 export const addMiembrosMesaToCircuito = (presidenteMesaCI, secretarioMesaCI, vocalMesaCI, eleccionId, numero) => {

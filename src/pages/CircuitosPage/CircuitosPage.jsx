@@ -53,6 +53,8 @@ function CircuitosPage() {
     try{
         const responseSave = await saveCircuito(eleccionId, numeroCircuito, establecimientoId )
         setCircuitos(prev => [...prev, responseSave.data])
+        setNumeroCircuito("")
+        setEstablecimientoId("")
     }
     catch(error){
         console.log("error", error)
@@ -69,10 +71,12 @@ function CircuitosPage() {
             <TableRow>
               <TableHead>Numero</TableHead>
               <TableHead>Establecimiento</TableHead>
+              <TableHead>Estado Votacion</TableHead>
             </TableRow>
           </TableHeader>
+
           <TableBody>
-            {circuitos.map(({ eleccionId, numero, establecimientoId }) => (
+            {circuitos.map(({ eleccionId, numero, establecimientoId, habilitado }) => (
               <TableRow key={eleccionId + numero}>
                 <TableCell>
                   <Link to={`/ManageCircuito/${eleccionId}/${numero}`} className="text-blue-600 hover:underline">
@@ -84,19 +88,31 @@ function CircuitosPage() {
                     establecimientos.find((est) => est.establecimientoId === establecimientoId)?.nombre || "Desconocido"
                   }
                 </TableCell>
+                <TableCell>
+                  {habilitado === true ? (
+                    <text className="text-green-600"> Iniciada </text>
+                  ) : habilitado === false ? (
+                    <text className="text-red-600"> Finalizada </text>
+                  ) : (
+                    <text className="text-amber-500"> Sin iniciar </text>
+                  )}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
+        
         </Table>
 
-        <div className="mt-18">
+        <div className="mt-18 ">
           <Popover>
             <PopoverTrigger asChild>
               <ButtonCustom label="Crear Circuito" size="large" />
             </PopoverTrigger>
-            <PopoverContent className="w-80">
+
+            <PopoverContent className="w-80 flex flex-col items-center shadow-2xl border-2 border-blue-900">
               <form onSubmit={handleCreateCircuito} className="w-full flex flex-col gap-2">
                 <input 
+                  value={numeroCircuito}  
                   id="numeroCircuito" 
                   onChange={(e) => setNumeroCircuito(e.target.value)} 
                   type="number" 
@@ -104,7 +120,7 @@ function CircuitosPage() {
                   placeholder="Ingrese numero del circuito" 
                   className="border-4 rounded-md p-2 outline-0"
                   />
-                <select onChange={(e) => setEstablecimientoId(e.target.value)} required defaultValue="" className="border-4 rounded-md p-2 outline-0">
+                <select value={establecimientoId} onChange={(e) => setEstablecimientoId(e.target.value)} required defaultValue="" className="border-4 rounded-md p-2 outline-0">
 
                   <option value="" disabled>Seleccione el establecimiento</option>
                   {establecimientos.map((est) => (
@@ -117,6 +133,7 @@ function CircuitosPage() {
                 <ButtonCustom label="Crear" size="small"></ButtonCustom>
               </form>
             </PopoverContent>
+
           </Popover>
         </div>
         
