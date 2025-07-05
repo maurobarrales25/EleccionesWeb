@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/table";
 import ButtonCustom from "@/components/atoms/ButtonCustom/ButtonCustom";
 import { Popover, PopoverTrigger, PopoverContent } from "@/Components/ui/popover";
-import { BsCircleFill } from "react-icons/bs";
 
 function EleccionesPage() {
   const location = useLocation();
@@ -40,6 +39,8 @@ function EleccionesPage() {
     try{
         const response = await saveEleccion(inputPopUpEleccion, selectTipoEleccion)
         setElecciones(prev => [...prev, response.data])
+        setInputPopUpEleccion("");
+        setSelectTipoEleccion("");
     }
     catch(error){
         console.log("error", error)
@@ -90,10 +91,12 @@ function EleccionesPage() {
                 </TableCell>
                 <TableCell>{new Date(fecha).toLocaleDateString()}</TableCell>
                 <TableCell>
-                  {habilitado ? (
-                    <BsCircleFill className="text-green-600" />
+                  {habilitado === true ? (
+                    <text className="text-green-600"> Iniciada </text>
+                  ) : habilitado === false ? (
+                    <text className="text-red-600"> Finalizada </text>
                   ) : (
-                    <BsCircleFill className="text-red-600" />
+                    <text className="text-amber-500"> Sin iniciar </text>
                   )}
                 </TableCell>
               </TableRow>
@@ -107,17 +110,21 @@ function EleccionesPage() {
             <PopoverTrigger asChild>
               <ButtonCustom label="Crear Eleccion" size="large" />
             </PopoverTrigger>
+
             <PopoverContent className="w-80 flex flex-col items-center shadow-2xl border-2 border-blue-900">
               <form onSubmit={handleCreateEleccion} className="w-full flex flex-col gap-2">
-                <input id="nombreEleccion" onChange={(e) => setInputPopUpEleccion(e.target.value)} type="text" required placeholder="Ingrese nombre de la eleccion" className="border-4 rounded-md p-2 outline-0"/>
-                <select onChange={(e) => setSelectTipoEleccion(e.target.value)} required defaultValue="" className="border-4 rounded-md p-2 outline-0">
+                <input id="nombreEleccion" value={inputPopUpEleccion}  onChange={(e) => setInputPopUpEleccion(e.target.value)} type="text" required placeholder="Ingrese nombre de la eleccion" className="border-4 rounded-md p-2 outline-0"/>
+
+                <select value={selectTipoEleccion} onChange={(e) => setSelectTipoEleccion(e.target.value)} required defaultValue="" className="border-4 rounded-md p-2 outline-0">
                   <option value="" disabled>Seleccione tipo de eleccion</option>
                   <option value="PRESIDENCIAL">PRESIDENCIAL</option>
                   <option value="BALLOTAGE">BALLOTAGE</option>
                 </select>
+
                 <ButtonCustom label="Crear" size="small"></ButtonCustom>
               </form>
             </PopoverContent>
+            
           </Popover>
         </div>
        )}
