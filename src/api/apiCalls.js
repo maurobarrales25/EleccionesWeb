@@ -10,6 +10,14 @@ export const getElecciones = () => {
     return axios.get(BASE_URL + 'eleccion/all')
 }
 
+export const getEleccionById = (eleccionId) => {
+    return axios.get(`${BASE_URL}eleccion/${eleccionId}`);
+}
+
+export const updateEleccionHabilitado = (eleccionId, habilitado) => {
+    return axios.post(BASE_URL + 'eleccion/updateHabilitado', null, {params: { eleccionId, habilitado } })
+}
+
 export const getAllCircuitosByEleccion = (eleccionId) => {
   return axios.get(BASE_URL + 'circuito/getAllByEleccion', { params: { eleccionId } });
 }
