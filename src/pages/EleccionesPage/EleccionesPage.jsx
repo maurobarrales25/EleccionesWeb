@@ -92,11 +92,11 @@ function EleccionesPage() {
                 <TableCell>{new Date(fecha).toLocaleDateString()}</TableCell>
                 <TableCell>
                   {habilitado === true ? (
-                    <text className="text-green-600"> Iniciada </text>
+                    <p className="text-green-600"> Iniciada </p>
                   ) : habilitado === false ? (
-                    <text className="text-red-600"> Finalizada </text>
+                    <p className="text-red-600"> Finalizada </p>
                   ) : (
-                    <text className="text-amber-500"> Sin iniciar </text>
+                    <p className="text-amber-500"> Sin iniciar </p>
                   )}
                 </TableCell>
               </TableRow>
