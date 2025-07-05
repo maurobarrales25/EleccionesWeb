@@ -8,6 +8,7 @@ import CircuitosPage from './pages/CircuitosPage/CircuitosPage';
 import ManageSearchVotarPage from './pages/ManageSearchVotarPage/ManageSearchVotarPage';
 import ManageCircuito from './pages/ManageCircuito/ManageCircuito';
 import ManageMiembrosMesa from './pages/ManageMiembrosMesa/ManageMiembrosMesa';
+import ManagePartidoPolitico from './pages/ManagePartidoPolitico/ManagePartidoPolitico';
 import VotarPage from './pages/VotarPage/VotarPage';
 
 function App() {
@@ -20,9 +21,10 @@ function App() {
         <Route path='/Elecciones' element={<EleccionesPage/>}/>
         <Route path='/ManageEleccion/:eleccionId' element={<ManageEleccion />} />
         <Route path='/CircuitosPage/:eleccionId' element={<CircuitosPage/>}/>
-        <Route path='/FindCircuitoPage/:eleccionId' element={<ManageSearchVotarPage/>}></Route>
+        <Route path='/FindCircuitoPage/:eleccionId' element={<ManageSearchVotarPage/>} />
         <Route path='/ManageCircuito/:circuitoId' element={<ManageCircuito/>}/>
         <Route path='/ManageMiembrosMesa/:circuitoId' element={<ManageMiembrosMesa/>}/>
+        <Route path='/ManagePartidoPolitico/:eleccionId' element={<ManagePartidoPolitico/>} />
         <Route path='/VotarPage/:circuitoId' element={<VotarPage/>}/>
       </Routes>
     </BrowserRouter>

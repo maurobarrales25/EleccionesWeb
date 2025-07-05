@@ -16,6 +16,7 @@ function ManageEleccion() {
             <ButtonCustom label="Gestionar Circuitos" size="large" />
         </Link>
         <ButtonCustom label="Gestionar Listas" size="large" />
+        <Link to={`/ManagePartidoPolitico/${eleccionId}`}>
         <ButtonCustom 
             label={
                 <label>
@@ -24,6 +25,7 @@ function ManageEleccion() {
             } 
             size="large" 
             />
+        </Link>
         <ButtonCustom label="Gestionar Candidatos" size="large" />
       </div>
     </div>

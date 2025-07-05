@@ -58,7 +58,11 @@ export const getPartidos = () => {
     return axios.get(BASE_URL + 'partido/getAll')
 }
 
-export const savePartido = () => {
+export const getPoliticos = () => {
+    return axios.get(BASE_URL + 'politico/getAll')
+}
+
+export const savePartido = (nombre, calleSede, numeroSede, presidenteCI) => {
     return axios.post(BASE_URL + 'partido/save', null, {params: { nombre, calleSede, numeroSede, presidenteCI } })
 }
 
@@ -68,4 +72,12 @@ export const getEstablecimientoById = (establecimientoId) => {
 
 export const getEstablecimientos = () => {
     return axios.get(BASE_URL + 'establecimiento/getAll');
+}
+
+export const gePoliticoByCedulaIdentidad = (cedulaIdentidad) => {
+    return axios.get(BASE_URL + 'politico/getByCedulaIdentidad', { params: { cedulaIdentidad } });
+}
+
+export const getCiudadanos = () => {
+    return axios.get(BASE_URL + 'ciudadano/all');
 }
