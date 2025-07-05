@@ -9,7 +9,7 @@ export default function VotarPage() {
 
     const [ selectedVote, setSelectedVote ] = useState("disabled")
     const [ lists, setLists ] = useState([])
-    const { eleccionId } = useParams()
+    const { eleccionId, circuitoNumero } = useParams()
 
     useEffect(() => {
         handleGetLists()
@@ -18,6 +18,7 @@ export default function VotarPage() {
     const handleGetLists = async() => {
         try {
             const response = await getListasByEleccion(eleccionId)
+            console.log(response.data)
             setLists(response.data)
         }
         catch(e) {
