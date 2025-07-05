@@ -3,7 +3,7 @@ import NavBar from "@/components/NavBar/NavBar";
 import ButtonCustom from '@/Components/atoms/ButtonCustom/ButtonCustom';
 import { useEffect, useState } from 'react';
 import { Table, TableRow, TableHead, TableHeader, TableBody, TableCell } from '@/Components/ui/table';
-import { getCircuitoByCredencial, getCircuitosByEleccion, getEstablecimientoById } from '@/api/apiCalls';
+import { getCircuitoByCredencialEleccion, getAllCircuitosByEleccion, getEstablecimientoById, getCircuitoById } from '@/api/apiCalls';
 import { BsCircleFill } from "react-icons/bs";
 
 export default function ManageSearchVotarPage() {
@@ -24,7 +24,8 @@ export default function ManageSearchVotarPage() {
     const handleSubmitCredencial = async(e) => {
         e.preventDefault()
         try {
-            const response = await getCircuitoByCredencial(inputSerieCredencial, inputNumeroCredencial)
+            const responseCredencialCircuito = await getCircuitoByCredencialEleccion(inputSerieCredencial, inputNumeroCredencial, eleccionId)
+            const response = await getCircuitoById(responseCredencialCircuito.data.eleccionId, responseCredencialCircuito.data.circuitoNumero);
             setCircuito(response.data)
         }
         catch(e) {
@@ -46,7 +47,7 @@ export default function ManageSearchVotarPage() {
     }, [circuito])
 
     const handleGetCircuitosByEleccion = async() => {
-        const response = await getCircuitosByEleccion(eleccionId)
+        const response = await getAllCircuitosByEleccion(eleccionId)
         setCircuitosByEleccion(response.data)
     }
 
@@ -89,12 +90,12 @@ export default function ManageSearchVotarPage() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    <TableRow key={circuito.circuitoId}>
+                    <TableRow key={circuito.eleccionId + circuito.numero}>
                         <TableCell>{circuito.numero}</TableCell>
                         <TableCell>{establecimiento.nombre}</TableCell>
                         <TableCell>
                         {
-                        booleanVotacion === true ? 
+                        circuito.habilitado === true ? 
                             <BsCircleFill className='text-green-600'/>  
                         :
                             <BsCircleFill className='text-red-600'/>
