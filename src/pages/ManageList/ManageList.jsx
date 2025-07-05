@@ -88,7 +88,7 @@ function ManageList() {
                                     value={numeroLista}
                                     onChange={(e) => setNumeroLista(e.target.value)}
                                 />
-                                <select value={departamentoId} onChange={(e) => setDepartamentoId(e.target.value)} required defaultValue="" className="border-4 rounded-md p-2 outline-0">
+                                <select value={departamentoId} onChange={(e) => setDepartamentoId(e.target.value)} required className="border-4 rounded-md p-2 outline-0">
                                     <option value="" disabled>Seleccione el departamento</option>
                                     {departamentos.map((dep) => (
                                         <option key={dep.departamentoId} value={dep.departamentoId}>

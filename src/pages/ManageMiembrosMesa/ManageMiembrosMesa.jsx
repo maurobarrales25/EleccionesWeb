@@ -28,9 +28,7 @@ function ManageMiembrosMesa() {
   const fetchMiembrosMesa = async () => {
     try {
       const responseCircuito = await getCircuitoById(eleccionId, numero);
-      console.log("Circuito response:", responseCircuito.data);
       const responsePresidente = await getPresidenteMesaByCI(responseCircuito.data.presidenteMesaCI);
-      console.log("Presidente response:", responsePresidente.data);
       const responseSecretario = await getSecretarioMesaByCI(responseCircuito.data.secretarioMesaCI);
       const responseVocal = await getVocalMesaByCI(responseCircuito.data.vocalMesaCI);
 
