@@ -34,6 +34,10 @@ export const getCircuitoById = (eleccionId, numero) => {
     return axios.get(BASE_URL + 'circuito/getById', {params: {eleccionId, numero} });
 }
 
+export const updateCircuitoHabilitado = (eleccionId, numero, habilitado) => {
+    return axios.post(BASE_URL + 'circuito/updateHabilitado', null, {params: { eleccionId, numero, habilitado } })
+}
+
 export const addMiembrosMesaToCircuito = (presidenteMesaCI, secretarioMesaCI, vocalMesaCI, eleccionId, numero) => {
     return axios.post(BASE_URL + 'circuito/addMiembrosMesa', null, {params: { presidenteMesaCI, secretarioMesaCI, vocalMesaCI, eleccionId, numero } })
 }

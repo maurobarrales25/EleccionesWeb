@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/table";
 import ButtonCustom from "@/components/atoms/ButtonCustom/ButtonCustom";
 import { Popover, PopoverTrigger, PopoverContent } from "@/Components/ui/popover";
+import { BsCircleFill } from "react-icons/bs";
 
 function CircuitosPage() {
   const { eleccionId } = useParams();
@@ -69,10 +70,11 @@ function CircuitosPage() {
             <TableRow>
               <TableHead>Numero</TableHead>
               <TableHead>Establecimiento</TableHead>
+              <TableHead>Estado Votacion</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {circuitos.map(({ eleccionId, numero, establecimientoId }) => (
+            {circuitos.map(({ eleccionId, numero, establecimientoId, habilitado }) => (
               <TableRow key={eleccionId + numero}>
                 <TableCell>
                   <Link to={`/ManageCircuito/${eleccionId}/${numero}`} className="text-blue-600 hover:underline">
@@ -83,6 +85,15 @@ function CircuitosPage() {
                   {
                     establecimientos.find((est) => est.establecimientoId === establecimientoId)?.nombre || "Desconocido"
                   }
+                </TableCell>
+                <TableCell>
+                  {habilitado === true ? (
+                    <text className="text-green-600"> Iniciada </text>
+                  ) : habilitado === false ? (
+                    <text className="text-red-600"> Finalizada </text>
+                  ) : (
+                    <text className="text-amber-500"> Sin iniciar </text>
+                  )}
                 </TableCell>
               </TableRow>
             ))}

@@ -6,8 +6,8 @@ export default function ResultadosPage() {
     return(
         <div>
             <NavBar/>
-            <div className="w-screen flex items-center justify-center">
-               <div className="flex w-[35vh] mt-10 flex-col justify-around items-center h-[60vh]">
+            <div className="flex flex-col items-center justify-center h-[80vh] mt-20 w-max- px-4 max-h-[70vh] overflow-auto">
+               <div className="flex flex-col justify-around h-[60vh] w-[35vh] ">
                 <Link className="w-72">
                     <ButtonCustom label="Por Circuito" size="full"/>
                 </Link>
