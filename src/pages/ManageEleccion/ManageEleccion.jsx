@@ -44,6 +44,7 @@ function ManageEleccion() {
             <ButtonCustom label="Gestionar Circuitos" size="large" disabled={habilitado !== true}/>
         </Link>
         <ButtonCustom label="Gestionar Listas" size="large" disabled={habilitado !== true}/>
+        <Link to={`/ManagePartidoPolitico/${eleccionId}`}>
         <ButtonCustom 
             label={
                 <label>
@@ -53,7 +54,7 @@ function ManageEleccion() {
             size="large" 
             disabled={habilitado !== true}
             />
-
+        </Link>
         <ButtonCustom label="Gestionar Candidatos" size="large" disabled={habilitado !== true}/>
 
         <Popover>
