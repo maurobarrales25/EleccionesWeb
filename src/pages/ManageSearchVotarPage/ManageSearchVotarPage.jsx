@@ -106,7 +106,7 @@ export default function ManageSearchVotarPage() {
                 </Table>
             </div>
             <div className="mt-20 flex items-center justify-center">
-                <Link to={`/VotarPage/${eleccionId}`}>
+                <Link to={`/VotarPage/${eleccionId}/${circuito.numero}`}>
                     <ButtonCustom label="Seleccionar Lista" size={buttonEnabled} />
                 </Link>    
             </div>
