@@ -26,7 +26,9 @@ function ManageEleccion() {
             size="large" 
             />
         </Link>
-        <ButtonCustom label="Gestionar Candidatos" size="large" />
+        <Link to ={`/ManageCandidato/${eleccionId}`}>
+          <ButtonCustom label="Gestionar Candidatos" size="large" />
+        </Link>
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ export const getElecciones = () => {
 }
 
 export const getAllCircuitosByEleccion = (eleccionId) => {
-  return axios.get(BASE_URL + 'circuito/getAllByEleccion', { params: { eleccionId } });
+    return axios.get(BASE_URL + 'circuito/getAllByEleccion', { params: { eleccionId } });
 }
 
 export const getCircuitoByCredencialEleccion = (serie, numero, eleccionId) => {
@@ -19,23 +19,23 @@ export const getCircuitoByCredencialEleccion = (serie, numero, eleccionId) => {
 }
 
 export const saveEleccion = (nombre, tipoEleccion) => {
-    return axios.post(BASE_URL + 'eleccion/save', null, {params: {nombre, tipoEleccion}})
+    return axios.post(BASE_URL + 'eleccion/save', null, { params: { nombre, tipoEleccion } })
 }
 
 export const getListasByEleccion = (eleccionId) => {
-    return axios.get(BASE_URL + 'lista/all', {params: { eleccionId } })
+    return axios.get(BASE_URL + 'lista/all', { params: { eleccionId } })
 }
 
 export const saveCircuito = (eleccionId, numero, establecimientoId) => {
-    return axios.post(BASE_URL + 'circuito/save', null, {params: {eleccionId, numero, establecimientoId } })
+    return axios.post(BASE_URL + 'circuito/save', null, { params: { eleccionId, numero, establecimientoId } })
 }
 
 export const getCircuitoById = (eleccionId, numero) => {
-    return axios.get(BASE_URL + 'circuito/getById', {params: {eleccionId, numero} });
+    return axios.get(BASE_URL + 'circuito/getById', { params: { eleccionId, numero } });
 }
 
 export const addMiembrosMesaToCircuito = (presidenteMesaCI, secretarioMesaCI, vocalMesaCI, eleccionId, numero) => {
-    return axios.post(BASE_URL + 'circuito/addMiembrosMesa', null, {params: { presidenteMesaCI, secretarioMesaCI, vocalMesaCI, eleccionId, numero } })
+    return axios.post(BASE_URL + 'circuito/addMiembrosMesa', null, { params: { presidenteMesaCI, secretarioMesaCI, vocalMesaCI, eleccionId, numero } })
 }
 
 export const getPresidenteMesaByCI = (cedulaIdentidad) => {
@@ -59,7 +59,7 @@ export const getPoliticos = () => {
 }
 
 export const savePartido = (nombre, calleSede, numeroSede, presidenteCI) => {
-    return axios.post(BASE_URL + 'partido/save', null, {params: { nombre, calleSede, numeroSede, presidenteCI } })
+    return axios.post(BASE_URL + 'partido/save', null, { params: { nombre, calleSede, numeroSede, presidenteCI } })
 }
 
 export const getEstablecimientoById = (establecimientoId) => {
@@ -76,4 +76,23 @@ export const gePoliticoByCedulaIdentidad = (cedulaIdentidad) => {
 
 export const getCiudadanos = () => {
     return axios.get(BASE_URL + 'ciudadano/all');
+}
+
+export const saveLista = (eleccionId, departamentoId, numero) => {
+    return axios.post(BASE_URL + 'lista/save', null, { params: { eleccionId, departamentoId, numero } });
+}
+
+export const getDepartamentos = () => {
+    return axios.get(BASE_URL + 'departamento/all');
+}
+export const getListasPoliticos = (eleccionId) => {
+    return axios.get(`${BASE_URL}listaPolitico/eleccion/${eleccionId}`);
+};
+
+export const saveListaPolitico = (listaDTO) => {
+    return axios.post(`${BASE_URL}listaPolitico`, listaDTO);
+};
+
+export const getCargos = () => {
+    return axios.get(`${BASE_URL}cargo/getAll`);
 }

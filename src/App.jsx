@@ -9,6 +9,7 @@ import ManageSearchVotarPage from './pages/ManageSearchVotarPage/ManageSearchVot
 import ManageCircuito from './pages/ManageCircuito/ManageCircuito';
 import ManageMiembrosMesa from './pages/ManageMiembrosMesa/ManageMiembrosMesa';
 import ManagePartidoPolitico from './pages/ManagePartidoPolitico/ManagePartidoPolitico';
+import ManageCandidato from './pages/ManageCandidato/ManageCandidato';
 import VotarPage from './pages/VotarPage/VotarPage';
 import ResultadosPage from './pages/ResultadosPage/ResultadosPage';
 
@@ -26,6 +27,7 @@ function App() {
         <Route path='/ManageCircuito/:eleccionId/:numero' element={<ManageCircuito/>}/>
         <Route path='/ManageMiembrosMesa/:eleccionId/:numero' element={<ManageMiembrosMesa/>}/>
         <Route path='/ManagePartidoPolitico/:eleccionId' element={<ManagePartidoPolitico/>} />
+        <Route path='/ManageCandidato/:eleccionId' element={<ManageCandidato/>} />
         <Route path='/VotarPage/:circuitoId' element={<VotarPage/>}/>
         <Route path='/ManageCircuito/:eleccionId/:numero' element={<ManageCircuito/>}/>
         <Route path='/ManageMiembrosMesa/:eleccionId/:numero' element={<ManageMiembrosMesa/>}/>
