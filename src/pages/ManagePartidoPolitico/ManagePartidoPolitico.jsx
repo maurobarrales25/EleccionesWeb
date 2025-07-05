@@ -81,7 +81,7 @@ function ManagePartidoPolitico() {
                         <PopoverTrigger asChild>
                             <ButtonCustom label="Agregar Partido" size="large" disabled={false} />
                         </PopoverTrigger>
-                        <PopoverContent className="w-80">
+                        <PopoverContent className="w-80 flex flex-col items-center shadow-2xl border-2 border-blue-900">
                             <form onSubmit={handleAddPartidoPolitico} className="w-full flex flex-col gap-2">
                                 <input
                                     id="nombrePartido"
