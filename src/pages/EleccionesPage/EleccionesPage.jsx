@@ -115,7 +115,7 @@ function EleccionesPage() {
               <form onSubmit={handleCreateEleccion} className="w-full flex flex-col gap-2">
                 <input id="nombreEleccion" value={inputPopUpEleccion}  onChange={(e) => setInputPopUpEleccion(e.target.value)} type="text" required placeholder="Ingrese nombre de la eleccion" className="border-4 rounded-md p-2 outline-0"/>
 
-                <select value={selectTipoEleccion} onChange={(e) => setSelectTipoEleccion(e.target.value)} required defaultValue="" className="border-4 rounded-md p-2 outline-0">
+                <select value={selectTipoEleccion} onChange={(e) => setSelectTipoEleccion(e.target.value)} required className="border-4 rounded-md p-2 outline-0">
                   <option value="" disabled>Seleccione tipo de eleccion</option>
                   <option value="PRESIDENCIAL">PRESIDENCIAL</option>
                   <option value="BALLOTAGE">BALLOTAGE</option>

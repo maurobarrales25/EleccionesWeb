@@ -120,7 +120,7 @@ function CircuitosPage() {
                   placeholder="Ingrese numero del circuito" 
                   className="border-4 rounded-md p-2 outline-0"
                   />
-                <select value={establecimientoId} onChange={(e) => setEstablecimientoId(e.target.value)} required defaultValue="" className="border-4 rounded-md p-2 outline-0">
+                <select value={establecimientoId} onChange={(e) => setEstablecimientoId(e.target.value)} required className="border-4 rounded-md p-2 outline-0">
 
                   <option value="" disabled>Seleccione el establecimiento</option>
                   {establecimientos.map((est) => (
