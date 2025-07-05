@@ -14,7 +14,6 @@ export default function ManageSearchVotarPage() {
     const [ inputNumeroCredencial, setInputNumeroCredencial ] = useState("")
     const [ establecimiento, setEstablecimiento ] = useState("")
     const [ buttonEnabled, setButtonEnabled ] = useState("disabled")
-
     const [ booleanVotacion, setBooleanVotacion ] = useState(false)
 
     useEffect(() => {

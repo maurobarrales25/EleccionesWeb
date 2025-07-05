@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/table";
 import ButtonCustom from "@/components/atoms/ButtonCustom/ButtonCustom";
 import { Popover, PopoverTrigger, PopoverContent } from "@/Components/ui/popover";
+import { BsCircleFill } from "react-icons/bs";
 
 function EleccionesPage() {
   const location = useLocation();
@@ -54,25 +55,50 @@ function EleccionesPage() {
             <TableRow>
               <TableHead>Nombre</TableHead>
               <TableHead>Fecha</TableHead>
+              <TableHead>Habilitado</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {elecciones.map(({ eleccionId, nombre, fecha }) => (
+            {elecciones.map(({ eleccionId, nombre, fecha, habilitado }) => (
               <TableRow key={eleccionId}>
                 <TableCell>
-                  <Link
-                    to={{
-                      pathname: `${baseLink}/${eleccionId}`,
-                    }}
-                    state={{ nombre }}
-                    className="text-blue-600 hover:underline"
-                  >
-                    {nombre}
-                  </Link>
+                  {baseLink === "/ManageEleccion" ? (
+                    <Link
+                      to={{
+                        pathname: `${baseLink}/${eleccionId}`,
+                      }}
+                      state={{ nombre }}
+                      className="text-blue-600 hover:underline"
+                    >
+                      {nombre}
+                    </Link>
+                  ) : (
+                    habilitado ? (
+                      <Link
+                        to={{
+                          pathname: `${baseLink}/${eleccionId}`,
+                        }}
+                        state={{ nombre }}
+                        className="text-blue-600 hover:underline"
+                      >
+                        {nombre}
+                      </Link>
+                    ) : (
+                      nombre
+                    )
+                  )}
                 </TableCell>
                 <TableCell>{new Date(fecha).toLocaleDateString()}</TableCell>
+                <TableCell>
+                  {habilitado ? (
+                    <BsCircleFill className="text-green-600" />
+                  ) : (
+                    <BsCircleFill className="text-red-600" />
+                  )}
+                </TableCell>
               </TableRow>
             ))}
+
           </TableBody>
         </Table>
         {baseLink === "/ManageEleccion" && (
