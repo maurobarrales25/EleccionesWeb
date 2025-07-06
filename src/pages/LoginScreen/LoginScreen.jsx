@@ -8,7 +8,7 @@ import coats from "@/assets/Coat_of_arms_of_Uruguay.svg.png";
 
 function LoginScreen() {
   const navigate = useNavigate()
-  const { setCiudadano } = useUser()
+  const { login } = useUser()
 
   const [ serieCredencial, setSerieCredencial ] = useState("")
   const [ numeroCredencial, setNumeroCredencial ] = useState(0)
@@ -17,7 +17,7 @@ function LoginScreen() {
     e.preventDefault()
     try {
       const response = await logIn({serie:serieCredencial, numero:numeroCredencial})
-      setCiudadano(response.data)
+      login(response.data)
       navigate("/MainScreen")
     }
     catch(error){
