@@ -173,3 +173,9 @@ export const partidoResultsByDepartamento = (eleccionId, departamentoId) => {
 export const candidatoResultsByDepartamento = (eleccionId, departamentoId) => {
     return axios.get(BASE_URL + "resultados/candidatoResultsByDepartamento", { params: { eleccionId, departamentoId } });
 }
+
+export const getGanadoresDepartamento = (eleccionId) => {
+    return axios.get(BASE_URL + "resultados/getGanadoresDepartamento", { params: { eleccionId } });
+}
+
+

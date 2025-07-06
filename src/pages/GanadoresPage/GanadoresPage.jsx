@@ -9,16 +9,16 @@ import {
   TableHead,
   TableCell,
 } from "@/components/ui/table";
-import { listaResultsByCircuito } from "@/api/apiCalls"; 
+import { getGanadoresDepartamento } from "@/api/apiCalls"; 
 
-export default function ResultadosByListaCircuito() {
-  const { eleccionId, numero: circuitoId } = useParams();
+export default function GanadoresPage() {
+  const { eleccionId } = useParams();
   const [resultados, setResultados] = useState([]);
 
   useEffect(() => {
     const fetchResultados = async () => {
       try {
-        const response = await listaResultsByCircuito(eleccionId, circuitoId);
+        const response = await getGanadoresDepartamento(eleccionId);
         setResultados(response.data);
       } 
       catch (error) {
@@ -27,7 +27,7 @@ export default function ResultadosByListaCircuito() {
     };
 
     fetchResultados(); 
-  }, [circuitoId, eleccionId]); 
+  }, [eleccionId]); 
 
   return (
     <div>
@@ -37,22 +37,20 @@ export default function ResultadosByListaCircuito() {
         <Table className="max-w-4xl">
           <TableHeader>
             <TableRow>
-              <TableHead>Nº Circuito</TableHead>
-              <TableHead>Lista</TableHead>
+              <TableHead>Candidato</TableHead>
               <TableHead>Partido</TableHead>
+              <TableHead>Departamento</TableHead>
               <TableHead>Cant Votos</TableHead>
-              <TableHead>Porcentaje</TableHead>
             </TableRow>
           </TableHeader>
 
           <TableBody>
-            {resultados.map(({ numeroLista, nombrePartido, cantidadVotos, porcentajeVotos }) => (
-              <TableRow key={numeroLista + nombrePartido + cantidadVotos}>
-                <TableCell>{circuitoId}</TableCell>
-                <TableCell>{numeroLista}</TableCell>
+            {resultados.map(({ nombreCandidato, nombrePartido, nombreDepartamento, cantidadVotos }) => (
+              <TableRow key={nombreCandidato + nombrePartido + nombreDepartamento + cantidadVotos}>
+                <TableCell>{nombreCandidato}</TableCell>
                 <TableCell>{nombrePartido}</TableCell>
+                <TableCell>{nombreDepartamento}</TableCell>
                 <TableCell>{cantidadVotos}</TableCell>
-                <TableCell>{porcentajeVotos}</TableCell>
               </TableRow>
             ))}
           </TableBody>

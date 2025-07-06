@@ -37,16 +37,18 @@ export default function DepartamentosPage() {
                 <Table className='flex flex-col w-full items-center'>
                 <TableHeader>
                     <TableRow>
-                        <TableHead className="text-xl font-bold" >Departamento</TableHead>
+                        <TableHead className='w-[30vh] text-2xl text-center' >Departamento</TableHead>
                     </TableRow>
                 </TableHeader>
 
                 <TableBody>
                     {departamentos.map(({ departamentoId, nombre }) => (
-                    <TableRow key={ departamentoId}>
-                        <Link to={`/ResultadosByDepartamentoPage/${eleccionId}/${departamentoId}`}>
-                            <TableCell className="text-xl">{nombre}</TableCell>
-                        </Link>
+                    <TableRow  key={ departamentoId}>
+                        <TableCell className='w-[30vh] text-2xl text-center'>
+                            <Link to={`/ResultadosByDepartamentoPage/${eleccionId}/${departamentoId}`}>
+                                {nombre}
+                            </Link>
+                        </TableCell>
                     </TableRow>
                     ))}
                 </TableBody>
