@@ -5,6 +5,15 @@ import { Table, TableRow, TableHead, TableHeader, TableBody, TableCell } from '@
 import { useUser } from "@/context/UserContext";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogAction,
+} from "@/components/ui/alert-dialog";
 
 export default function VotarPage() {
 
@@ -67,7 +76,21 @@ export default function VotarPage() {
             <NavBar />
             {!ciudadano ? (
                 <div className="mt-20 text-center text-red-600 font-semibold">
-                    No estás autorizado para votar.
+                    <AlertDialog open={errorCredenciales}>
+                        <AlertDialogContent>
+                        <AlertDialogHeader>
+                            <AlertDialogTitle>Credenciales no válidas</AlertDialogTitle>
+                            <AlertDialogDescription>
+                            No estás habilitado para votar en esta elección con las credenciales ingresadas.
+                            </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                            <AlertDialogAction className="bg-red-500 cursor-pointer hover:bg-red-700" onClick={() => {setErrorCredenciales(false), navigate("/Elecciones", {state:{baseLink:"/FindCircuitoPage"}})}}>
+                            Aceptar
+                            </AlertDialogAction>
+                        </AlertDialogFooter>
+                        </AlertDialogContent>
+                    </AlertDialog>
                 </div>
                 ) : participacion === true ? 
                 (
