@@ -21,6 +21,7 @@ import DepartamentosPage from './pages/DepartamentosPage/DepartamentosPage';
 import ResultadosByDepartamento from './pages/ResultadosByDepartamentosPage/ResultadosByDepartamentos';
 import ResultadosByPartidoDepartamento from './pages/ResultadosByDptoPartidoPage/ResultadosByDptoPartido';
 import ResultadosByCandidatoDepartamento from './pages/ResultadosByDptoCandidato/ResultadosByDptoCandidato';
+import GanadoresPage from './pages/GanadoresPage/GanadoresPage';
 
 function App() {
 
@@ -50,6 +51,7 @@ function App() {
         <Route path='/ResultadosByDepartamentoPage/:eleccionId/:departamentoId' element={<ResultadosByDepartamento/>}/>
         <Route path='/ResultadosByPartidoDepartamento/:eleccionId/:departamentoId' element={<ResultadosByPartidoDepartamento/>}/>
         <Route path='/ResultadosByCandidatoDepartamento/:eleccionId/:departamentoId' element={<ResultadosByCandidatoDepartamento/>}/>
+        <Route path='/GanadoresPage/:eleccionId' element={<GanadoresPage/>}/>
       </Routes>
     </BrowserRouter>
   )
