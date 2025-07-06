@@ -26,12 +26,24 @@ export const getCircuitoByCredencialEleccion = (serie, numero, eleccionId) => {
     return axios.get(BASE_URL + `CredencialCircuito/${serie}/${numero}/${eleccionId}`)
 }
 
+export const setCredencialCircuito = (data) => {
+    return axios.post(BASE_URL + `CredencialCircuito/save`, data)
+}
+
+export const getDepartamentoByCircuitoNumero = (numero) => {
+    return axios.get(BASE_URL + `circuito/getDepartamentoByCircuitoNumero`, {params:{numero}})
+}
+
 export const saveEleccion = (nombre, tipoEleccion) => {
     return axios.post(BASE_URL + 'eleccion/save', null, { params: { nombre, tipoEleccion } })
 }
 
 export const getListasByEleccion = (eleccionId) => {
   return axios.get(`${BASE_URL}lista/all/${eleccionId}`)
+}
+
+export const getListasByEleccionAndDepartamento = (eleccionId, departamentoId) => {
+    return axios.get(BASE_URL + `/listaPolitico/eleccion/${eleccionId}/departamento/${departamentoId}`)
 }
 
 export const saveCircuito = (eleccionId, numero, establecimientoId) => {
@@ -116,6 +128,18 @@ export const getListaPoliticoByEleccion = (eleccionId) => {
 
 export const getCargos = () => {
     return axios.get(`${BASE_URL}cargo/getAll`);
+}
+
+export const saveVoto = (eleccionId, numeroCircuito, numeroLista, valor, cedulaPolitico, departamentoId) => {
+    return axios.post(BASE_URL + 'voto', null, {params: {eleccionId, numeroCircuito, numeroLista, valor, cedulaPolitico, departamentoId}})
+}
+
+export const updateParticipacion = (serie, numero, eleccionId, circuitoNumero) => {
+    return axios.put(BASE_URL + `CredencialCircuito/participacion/${serie}/${numero}/${eleccionId}/${circuitoNumero}`)
+}
+
+export const getParticipacionCredencialCircuito = (serie, numero, eleccionId) => {
+    return axios.get(BASE_URL + `CredencialCircuito/participacion/${serie}/${numero}/${eleccionId}`)
 }
 
 export const saveCredencial = (serie, numero, validez) => {
