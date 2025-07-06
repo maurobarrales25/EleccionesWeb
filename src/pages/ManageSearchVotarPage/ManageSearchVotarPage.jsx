@@ -13,8 +13,8 @@ export default function ManageSearchVotarPage() {
     const [ circuitosByEleccion, setCircuitosByEleccion ] = useState([])
     const [ inputNumeroCredencial, setInputNumeroCredencial ] = useState("")
     const [ establecimiento, setEstablecimiento ] = useState("")
+    const [ estadoVotacionCircuito, setEstadoVotacionCircuito ] = useState(null)
     const [ buttonEnabled, setButtonEnabled ] = useState("disabled")
-    const [ booleanVotacion, setBooleanVotacion ] = useState(false)
 
     useEffect(() => {
         handleGetCircuitosByEleccion()
@@ -26,10 +26,12 @@ export default function ManageSearchVotarPage() {
             const responseCredencialCircuito = await getCircuitoByCredencialEleccion(inputSerieCredencial, inputNumeroCredencial, eleccionId)
             const response = await getCircuitoById(responseCredencialCircuito.data.eleccionId, responseCredencialCircuito.data.circuitoNumero);
             setCircuito(response.data)
+            setEstadoVotacionCircuito(response.data.habilitado)
         }
         catch(e) {
             console.log(e, "ERROR")
             setButtonEnabled("disabled")
+            setEstadoVotacionCircuito(null)
             setCircuito({})
             setEstablecimiento("")
         }
@@ -92,22 +94,32 @@ export default function ManageSearchVotarPage() {
                     <TableRow key={circuito.eleccionId + circuito.numero}>
                         <TableCell>{circuito.numero}</TableCell>
                         <TableCell>{establecimiento.nombre}</TableCell>
+                        {estadoVotacionCircuito !== null && (
+                            <TableCell>
+                            {
+                                estadoVotacionCircuito === true ? 
+                                    <BsCircleFill className='text-green-600'/>  
+                                :
+                                    <BsCircleFill className='text-red-600'/>
+                            }
+                            </TableCell>
+                        )}
                         <TableCell>
-                        {
-                        circuito.habilitado === true ? 
-                            <BsCircleFill className='text-green-600'/>  
-                        :
-                            <BsCircleFill className='text-red-600'/>
-                        }
                         </TableCell>
                     </TableRow>
                 </TableBody>
                 </Table>
             </div>
             <div className="mt-20 flex items-center justify-center">
-                <Link to={`/VotarPage/${eleccionId}/${circuito.numero}`}>
-                    <ButtonCustom label="Seleccionar Lista" size={buttonEnabled} />
-                </Link>    
+                {(buttonEnabled === "active" && estadoVotacionCircuito === true) ? 
+                (
+                    <Link to={`/VotarPage/${eleccionId}/${circuito.numero}`}>
+                        <ButtonCustom label="Seleccionar Lista" size={buttonEnabled} />
+                    </Link>    
+                ): 
+                (
+                    <ButtonCustom label="Seleccionar Lista" size={"disabled"} />
+                )}
             </div>
         </div>
   )
