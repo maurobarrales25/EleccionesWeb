@@ -153,3 +153,23 @@ export const setCredencial = (serie, numero, cedulaIdentidad) => {
 export const getCiudadanos = () => {
     return axios.get(BASE_URL + 'ciudadano/all');
 }
+
+export const listaResultsByCircuito = (eleccionId, circuitoId) => {
+    return axios.get(BASE_URL + "resultados/listaResultsByCircuito", { params: { eleccionId, circuitoId } });
+}
+
+export const partidoResultsByCircuito = (eleccionId, circuitoId) => {
+    return axios.get(BASE_URL + "resultados/partidoPolitoResultsByCirtuito", { params: { eleccionId, circuitoId } });
+}
+
+export const candidatoResultsByCircuito = (eleccionId, circuitoId) => {
+    return axios.get(BASE_URL + "resultados/candidatoResultsByCircuito", { params: { eleccionId, circuitoId } });
+}
+
+export const partidoResultsByDepartamento = (eleccionId, departamentoId) => {
+    return axios.get(BASE_URL + "resultados/partidoResultsByDepartamento", { params: { eleccionId, departamentoId } });
+}
+
+export const candidatoResultsByDepartamento = (eleccionId, departamentoId) => {
+    return axios.get(BASE_URL + "resultados/candidatoResultsByDepartamento", { params: { eleccionId, departamentoId } });
+}
