@@ -28,6 +28,7 @@ function ManageList() {
         try {
             const response = await getListasByEleccion(eleccionId);
             const responseDepartamentos = await getDepartamentos();
+            console.log("depto: " + responseDepartamentos)
             setListas(response.data);
             setDepartamentos(responseDepartamentos.data);
         } catch (error) {

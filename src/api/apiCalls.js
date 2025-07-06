@@ -31,7 +31,7 @@ export const saveEleccion = (nombre, tipoEleccion) => {
 }
 
 export const getListasByEleccion = (eleccionId) => {
-    return axios.get(BASE_URL + 'lista/all', { params: { eleccionId } })
+  return axios.get(`${BASE_URL}lista/all/${eleccionId}`)
 }
 
 export const saveCircuito = (eleccionId, numero, establecimientoId) => {
@@ -62,12 +62,24 @@ export const getVocalMesaByCI = (cedulaIdentidad) => {
     return axios.get(BASE_URL + 'VocalMesa/getByCedulaIdentidad', { params: { cedulaIdentidad } });
 }
 
-export const getPartidos = () => {
-    return axios.get(BASE_URL + 'partido/getAll')
+export const savePolitico = (cedulaIdentidad, nombre, apellido, fechaNacimiento) => {
+    return axios.post(BASE_URL + 'politico/save', { cedulaIdentidad, nombre, apellido, fechaNacimiento });
+}
+
+export const updateCargoPolitico = (cedulaIdentidad, cargoId) => {
+  return axios.post(BASE_URL + 'politico/set-cargo', null, { params: { cedulaIdentidad, cargoId }});
+}
+
+export const updatePartidoDePolitico = (cedulaIdentidad, partidoId) => {
+    return axios.post(BASE_URL + 'politico/panquequear' , null, { params: { cedulaIdentidad, partidoId } }) 
 }
 
 export const getPoliticos = () => {
-    return axios.get(BASE_URL + 'politico/getAll')
+    return axios.get(BASE_URL + 'politico/get-all')
+}
+
+export const getPartidos = () => {
+    return axios.get(BASE_URL + 'partido/getAll')
 }
 
 export const savePartido = (nombre, calleSede, numeroSede, presidenteCI) => {
@@ -82,14 +94,6 @@ export const getEstablecimientos = () => {
     return axios.get(BASE_URL + 'establecimiento/getAll');
 }
 
-export const gePoliticoByCedulaIdentidad = (cedulaIdentidad) => {
-    return axios.get(BASE_URL + 'politico/getByCedulaIdentidad', { params: { cedulaIdentidad } });
-}
-
-export const getCiudadanos = () => {
-    return axios.get(BASE_URL + 'ciudadano/all');
-}
-
 export const saveLista = (eleccionId, departamentoId, numero) => {
     return axios.post(BASE_URL + 'lista/save', null, { params: { eleccionId, departamentoId, numero } });
 }
@@ -97,14 +101,31 @@ export const saveLista = (eleccionId, departamentoId, numero) => {
 export const getDepartamentos = () => {
     return axios.get(BASE_URL + 'departamento/all');
 }
+
 export const getListasPoliticos = (eleccionId) => {
     return axios.get(`${BASE_URL}listaPolitico/eleccion/${eleccionId}`);
 };
 
-export const saveListaPolitico = (eleccionId, numero, departamentoId, cedulaIdentidad) => {
-    return axios.post(BASE_URL + "/listaPolitico/save", null, {params: {eleccionId, numero, departamentoId, cedulaIdentidad} });
+export const saveListaPolitico = (eleccionId, numero, cedulaIdentidad, departamentoId) => {
+    return axios.post(BASE_URL + "listaPolitico/save", null, {params: {eleccionId, numero, cedulaIdentidad,departamentoId} });
+};
+
+export const getListaPoliticoByEleccion = (eleccionId) => {
+    return axios.get(`${BASE_URL}listaPolitico/eleccion/${eleccionId}`);
 };
 
 export const getCargos = () => {
     return axios.get(`${BASE_URL}cargo/getAll`);
+}
+
+export const saveCredencial = (serie, numero, validez) => {
+    return axios.post(BASE_URL + "credencial/save", null, {params: { serie, numero, validez } } )
+}
+
+export const setCredencial = (serie, numero, cedulaIdentidad) => {
+    return axios.post (BASE_URL + "ciudadano/addCredencial",  null, {params: {serie, numero, cedulaIdentidad} })
+}
+
+export const getCiudadanos = () => {
+    return axios.get(BASE_URL + 'ciudadano/all');
 }

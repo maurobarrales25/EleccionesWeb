@@ -40,12 +40,15 @@ function ManageEleccion() {
       <NavBar />
       <div className="flex flex-col justify-around items-center mt-10 h-[60vh]">
       <h1 className="text-3xl font-bold text-center mt-6">{eleccion.nombre}</h1>
+
         <Link to={`/CircuitosPage/${eleccionId}`}>
             <ButtonCustom label="Gestionar Circuitos" size="large" disabled={habilitado !== true}/>
         </Link>
+
         <Link to ={`/ManageList/${eleccionId}`}>
           <ButtonCustom label="Gestionar Listas" size="large" disabled={habilitado !== true}/>
         </Link>
+
         <Link to={`/ManagePartidoPolitico/${eleccionId}`}>
           <ButtonCustom 
               label={
@@ -57,7 +60,10 @@ function ManageEleccion() {
               disabled={habilitado !== true}
             />
         </Link>
-        <ButtonCustom label="Gestionar Candidatos" size="large" disabled={habilitado !== true}/>
+
+        <Link to={`/ManageCandidato/${eleccionId}`}>
+          <ButtonCustom label="Gestionar Candidatos" size="large" disabled={habilitado !== true}/>
+        </Link>
 
         <Popover>
           <PopoverTrigger asChild>
