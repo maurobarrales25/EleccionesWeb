@@ -1,29 +1,47 @@
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import NavBar from "@/components/NavBar/NavBar";
 import ButtonCustom from '@/Components/atoms/ButtonCustom/ButtonCustom';
 import { useEffect, useState } from 'react';
 import { Table, TableRow, TableHead, TableHeader, TableBody, TableCell } from '@/Components/ui/table';
 import { getCircuitoByCredencialEleccion, getAllCircuitosByEleccion, getEstablecimientoById, getCircuitoById } from '@/api/apiCalls';
 import { BsCircleFill } from "react-icons/bs";
+import { useUser } from '@/context/UserContext';
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogAction,
+} from "@/components/ui/alert-dialog";
 
 export default function ManageSearchVotarPage() {
+    const { ciudadano } = useUser()
     const { eleccionId } = useParams()
-    const [ inputSerieCredencial, setInputSerieCredencial ] = useState("")
     const [ circuito, setCircuito ] = useState({})
     const [ circuitosByEleccion, setCircuitosByEleccion ] = useState([])
-    const [ inputNumeroCredencial, setInputNumeroCredencial ] = useState("")
     const [ establecimiento, setEstablecimiento ] = useState("")
     const [ estadoVotacionCircuito, setEstadoVotacionCircuito ] = useState(null)
     const [ buttonEnabled, setButtonEnabled ] = useState("disabled")
+    const [ errorCredenciales, setErrorCredenciales ] = useState(false)
+    
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         handleGetCircuitosByEleccion()
     }, [])
 
-    const handleSubmitCredencial = async(e) => {
-        e.preventDefault()
+    useEffect(() => {
+        if (ciudadano) {
+            handleSubmitCredencial();
+        }
+    }, [ciudadano]);
+
+    const handleSubmitCredencial = async() => {
         try {
-            const responseCredencialCircuito = await getCircuitoByCredencialEleccion(inputSerieCredencial, inputNumeroCredencial, eleccionId)
+            const responseCredencialCircuito = await getCircuitoByCredencialEleccion(ciudadano.serieCredencial, ciudadano.numeroCredencial, eleccionId)
             const response = await getCircuitoById(responseCredencialCircuito.data.eleccionId, responseCredencialCircuito.data.circuitoNumero);
             setCircuito(response.data)
             setEstadoVotacionCircuito(response.data.habilitado)
@@ -34,6 +52,7 @@ export default function ManageSearchVotarPage() {
             setEstadoVotacionCircuito(null)
             setCircuito({})
             setEstablecimiento("")
+            setErrorCredenciales(true)
         }
     }
 
@@ -60,27 +79,22 @@ export default function ManageSearchVotarPage() {
     return (
         <div>
             <NavBar />
-            <div className='flex items-center justify-start mt-20'>
-                <div className="flex flex-col justify-center items-start mx-5 h-[5vh]">
-                    <form onSubmit={handleSubmitCredencial} className="flex gap-3">
-                        <input
-                            onChange={(e) => setInputSerieCredencial(e.target.value)}
-                            required
-                            type="text"
-                            placeholder="Ingresar Serie Credencial"
-                            className="p-[1vh] text-[1.6vh] bg-[#d9d9d9] w-60 h-full rounded"
-                        />
-                        <input
-                            onChange={(e) => setInputNumeroCredencial(e.target.value)}
-                            required
-                            type="text"
-                            placeholder="Ingresar Numero Credencial"
-                            className="p-[1vh] text-[1.6vh] bg-[#d9d9d9] w-60 h-full rounded"
-                        /> 
-                        <ButtonCustom label="Buscar" size="medium" />                  
-                    </form>
-                </div>
-            </div>
+            <AlertDialog open={errorCredenciales}>
+                <AlertDialogContent>
+                <AlertDialogHeader>
+                    <AlertDialogTitle>Credenciales no válidas</AlertDialogTitle>
+                    <AlertDialogDescription>
+                    No estás habilitado para votar en esta elección con las credenciales ingresadas.
+                    </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                    <AlertDialogAction className="bg-red-500 cursor-pointer hover:bg-red-700" onClick={() => {setErrorCredenciales(false), navigate("/Elecciones", {state:{baseLink:"/FindCircuitoPage"}})}}>
+                    Aceptar
+                    </AlertDialogAction>
+                </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
+
             <div className='mt-10 flex items-center justify-center'>
                 <Table className="max-w-4xl mx-auto">
                 <TableHeader>
@@ -91,7 +105,7 @@ export default function ManageSearchVotarPage() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    <TableRow key={circuito.eleccionId + circuito.numero}>
+                    <TableRow key={circuito.numero}>
                         <TableCell>{circuito.numero}</TableCell>
                         <TableCell>{establecimiento.nombre}</TableCell>
                         {estadoVotacionCircuito !== null && (
