@@ -13,6 +13,14 @@ import ManageCandidato from './pages/ManageCandidato/ManageCandidato';
 import ManageList from './pages/ManageList/ManageList';
 import VotarPage from './pages/VotarPage/VotarPage';
 import ResultadosPage from './pages/ResultadosPage/ResultadosPage';
+import ResultadosByCircuitosPage from './pages/ResultadosByCircuitoPage/ResultadosByCircuito';
+import ResultadosByListaCircuito from './pages/ResultadosByListaCircuitoPage/ResultadosByListaCircuito';
+import ResultadosByPartidoCircuito from './pages/ResultadosByPartidoCircuitoPage/ResultadosByPartidoCircuito';
+import ResultadosByCandidatoCircuito from './pages/ResultadosByCandidatoCircuitoPage/ResultadosByCandidatoCircuito';
+import DepartamentosPage from './pages/DepartamentosPage/DepartamentosPage';
+import ResultadosByDepartamento from './pages/ResultadosByDepartamentosPage/ResultadosByDepartamentos';
+import ResultadosByPartidoDepartamento from './pages/ResultadosByDptoPartidoPage/ResultadosByDptoPartido';
+import ResultadosByCandidatoDepartamento from './pages/ResultadosByDptoCandidato/ResultadosByDptoCandidato';
 
 function App() {
 
@@ -34,6 +42,14 @@ function App() {
         <Route path='/ManageCircuito/:eleccionId/:numero' element={<ManageCircuito/>}/>
         <Route path='/ManageMiembrosMesa/:eleccionId/:numero' element={<ManageMiembrosMesa/>}/>
         <Route path='/ResultsPage/:eleccionId' element={<ResultadosPage/>}/>
+        <Route path='/ResultadosByCircuitosPage/:eleccionId/:numero' element={<ResultadosByCircuitosPage/>}/>
+        <Route path='/ResultadosByListaCircuito/:eleccionId/:numero' element={<ResultadosByListaCircuito/>}/>
+        <Route path='/ResultadosByPartidoCircuito/:eleccionId/:numero' element={<ResultadosByPartidoCircuito/>}/>
+        <Route path='/ResultadosByCandidatoCircuito/:eleccionId/:numero' element={<ResultadosByCandidatoCircuito/>}/>
+        <Route path='/DepartamentosPage/:eleccionId' element={<DepartamentosPage/>}/>
+        <Route path='/ResultadosByDepartamentoPage/:eleccionId/:departamentoId' element={<ResultadosByDepartamento/>}/>
+        <Route path='/ResultadosByPartidoDepartamento/:eleccionId/:departamentoId' element={<ResultadosByPartidoDepartamento/>}/>
+        <Route path='/ResultadosByCandidatoDepartamento/:eleccionId/:departamentoId' element={<ResultadosByCandidatoDepartamento/>}/>
       </Routes>
     </BrowserRouter>
   )

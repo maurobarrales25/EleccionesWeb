@@ -1,7 +1,7 @@
 import NavBar from "@/components/NavBar/NavBar";
 import { useEffect, useState } from "react";
 import { getAllCircuitosByEleccion, getEstablecimientos, saveCircuito } from "@/api/apiCalls";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import {
   Table,
   TableHeader,
@@ -15,6 +15,8 @@ import { Popover, PopoverTrigger, PopoverContent } from "@/Components/ui/popover
 
 function CircuitosPage() {
   const { eleccionId } = useParams();
+  const location = useLocation();
+  const baseLink = location.state?.baseLink;
   const [circuitos, setCircuitos] = useState([]);
   const [establecimientos, setEstablecimientos] = useState([]);
   const [establecimientoId, setEstablecimientoId] = useState("");
@@ -78,10 +80,16 @@ function CircuitosPage() {
           <TableBody>
             {circuitos.map(({ eleccionId, numero, establecimientoId, habilitado }) => (
               <TableRow key={eleccionId + numero}>
-                <TableCell>
-                  <Link to={`/ManageCircuito/${eleccionId}/${numero}`} className="text-blue-600 hover:underline">
-                    {numero}
-                  </Link>
+                  <TableCell>
+                  {baseLink === "/ResultadosByCircuitosPage" && habilitado === true ? (
+                    <span>{numero}</span>
+
+                  ) : (
+
+                    <Link to={`${baseLink}/${eleccionId}/${numero}`} className="text-blue-600 hover:underline">
+                      {numero}
+                    </Link>
+                  )}
                 </TableCell>
                 <TableCell>
                   {
@@ -103,40 +111,44 @@ function CircuitosPage() {
         
         </Table>
 
-        <div className="mt-18 ">
-          <Popover>
-            <PopoverTrigger asChild>
-              <ButtonCustom label="Crear Circuito" size="large" />
-            </PopoverTrigger>
+        {baseLink !== "/ResultadosByCircuitosPage" && (
+          <div className="mt-18">
+            <Popover>
+              <PopoverTrigger asChild>
+                <ButtonCustom label="Crear Circuito" size="large" />
+              </PopoverTrigger>
 
-            <PopoverContent className="w-80 flex flex-col items-center shadow-2xl border-2 border-blue-900">
-              <form onSubmit={handleCreateCircuito} className="w-full flex flex-col gap-2">
-                <input 
-                  value={numeroCircuito}  
-                  id="numeroCircuito" 
-                  onChange={(e) => setNumeroCircuito(e.target.value)} 
-                  type="number" 
-                  required 
-                  placeholder="Ingrese numero del circuito" 
-                  className="border-4 rounded-md p-2 outline-0"
+              <PopoverContent className="w-80 flex flex-col items-center shadow-2xl border-2 border-blue-900">
+                <form onSubmit={handleCreateCircuito} className="w-full flex flex-col gap-2">
+                  <input 
+                    value={numeroCircuito}  
+                    id="numeroCircuito" 
+                    onChange={(e) => setNumeroCircuito(e.target.value)} 
+                    type="number" 
+                    required 
+                    placeholder="Ingrese número del circuito" 
+                    className="border-4 rounded-md p-2 outline-0"
                   />
-                <select value={establecimientoId} onChange={(e) => setEstablecimientoId(e.target.value)} required className="border-4 rounded-md p-2 outline-0">
-
-                  <option value="" disabled>Seleccione el establecimiento</option>
-                  {establecimientos.map((est) => (
-                    <option key={est.establecimientoId} value={est.establecimientoId}>
-                      {est.nombre}
-                    </option>
-                  ))}
-
-                </select>
-                <ButtonCustom label="Crear" size="small"></ButtonCustom>
-              </form>
-            </PopoverContent>
-
-          </Popover>
-        </div>
-        
+                  <select 
+                    value={establecimientoId} 
+                    onChange={(e) => setEstablecimientoId(e.target.value)} 
+                    required 
+                    className="border-4 rounded-md p-2 outline-0"
+                  >
+                    <option value="" disabled>Seleccione el establecimiento</option>
+                    {establecimientos.map((est) => (
+                      <option key={est.establecimientoId} value={est.establecimientoId}>
+                        {est.nombre}
+                      </option>
+                    ))}
+                  </select>
+                  <ButtonCustom label="Crear" size="small" />
+                </form>
+              </PopoverContent>
+            </Popover>
+          </div>
+        )}
+      
       </div>
     </div>
   );

@@ -67,11 +67,26 @@ function ManageCandidato() {
         e.preventDefault()
         try{
             const responsePoliticoSave = await savePolitico(cedula, nombre, apellido, fechaNacimiento);
+
+            setCedula("");
+            setNombre("");
+            setApellido("");
+            setFechaNacimiento("");
+
             const responsePoliticoCargo = await updateCargoPolitico(cedula, cargoId);
+            setCargoId("");
+
             const responsePoliticoPartido = await updatePartidoDePolitico(cedula, partidoId);
+            setPartidoId("");
 
             const responseCredencialSave = await saveCredencial(serieCredencial, numeroCredencial, true);
             const responseSetCredencial = await setCredencial(serieCredencial, numeroCredencial, cedula)
+            setSerieCredencial("");
+            setNumeroCredencial("");
+
+            const updatedPoliticos = await getPoliticos();
+            setPoliticos(updatedPoliticos.data);
+                        
         }
         catch(error){
             console.log("error creating politico", error)
@@ -82,6 +97,9 @@ function ManageCandidato() {
         e.preventDefault()
         try{
             const responseListaPoliticoSave = await saveListaPolitico(eleccionId, listaNumero, cedula, listaDepartamento);
+            setListasPolitico(prev => [...prev, responseListaPoliticoSave.data]);
+            setListaNumero("");
+            setCedula("")
         } 
         catch(error){
             console.log("error creating lista eleccion", error)

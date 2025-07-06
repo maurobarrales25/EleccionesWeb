@@ -41,7 +41,7 @@ function ManageEleccion() {
       <div className="flex flex-col justify-around items-center mt-10 h-[60vh]">
       <h1 className="text-3xl font-bold text-center mt-6">{eleccion.nombre}</h1>
 
-        <Link to={`/CircuitosPage/${eleccionId}`}>
+        <Link to={`/CircuitosPage/${eleccionId}`} state={{ baseLink: "/ManageCircuito"}} >
             <ButtonCustom label="Gestionar Circuitos" size="large" disabled={habilitado !== true}/>
         </Link>
 
