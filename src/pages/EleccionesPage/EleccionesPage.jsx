@@ -63,8 +63,9 @@ function EleccionesPage() {
             {elecciones.map(({ eleccionId, nombre, fecha, habilitado }) => (
               <TableRow key={eleccionId}>
                 <TableCell>
-                {baseLink === "/ResultsPage" ? (
-                  habilitado === false ? (
+                {(baseLink === "/ResultsPage" && habilitado === false) ||
+                  ((baseLink === "/FindCircuitoPage" || baseLink === "/ManageEleccion") && habilitado === true) ||
+                  (baseLink !== "/ResultsPage" && baseLink !== "/FindCircuitoPage" && baseLink !== "/ManageEleccion") ? (
                     <Link
                       to={{
                         pathname: `${baseLink}/${eleccionId}`,
@@ -76,17 +77,6 @@ function EleccionesPage() {
                     </Link>
                   ) : (
                     nombre
-                  )
-                ) : (
-                  <Link
-                    to={{
-                      pathname: `${baseLink}/${eleccionId}`,
-                    }}
-                    state={{ nombre }}
-                    className="text-blue-600 hover:underline"
-                  >
-                    {nombre}
-                  </Link>
                 )}
               </TableCell>
                 <TableCell>{new Date(fecha).toLocaleDateString()}</TableCell>
