@@ -9,7 +9,22 @@ import {
 } from "@/components/ui/table";
 import ButtonCustom from "@/components/atoms/ButtonCustom/ButtonCustom";
 import { Popover, PopoverTrigger, PopoverContent } from "@/Components/ui/popover";
-import { addMiembrosMesaToCircuito, getCircuitoById, getPresidenteMesaByCI, getSecretarioMesaByCI, getVocalMesaByCI } from "@/api/apiCalls";
+import {
+  addMiembrosMesaToCircuito,
+  getCircuitoById,
+  getPresidenteMesaByCI,
+  getSecretarioMesaByCI,
+  getVocalMesaByCI,
+} from "@/api/apiCalls";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogAction,
+} from "@/components/ui/alert-dialog";
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -25,18 +40,25 @@ function ManageMiembrosMesa() {
   const [secretario, setSecretario] = useState(null);
   const [vocal, setVocal] = useState(null);
 
+  const [errorDialogOpen, setErrorDialogOpen] = useState(false);
+
   const fetchMiembrosMesa = async () => {
     try {
       const responseCircuito = await getCircuitoById(eleccionId, numero);
-      const responsePresidente = await getPresidenteMesaByCI(responseCircuito.data.presidenteMesaCI);
-      const responseSecretario = await getSecretarioMesaByCI(responseCircuito.data.secretarioMesaCI);
-      const responseVocal = await getVocalMesaByCI(responseCircuito.data.vocalMesaCI);
+      const responsePresidente = await getPresidenteMesaByCI(
+        responseCircuito.data.presidenteMesaCI
+      );
+      const responseSecretario = await getSecretarioMesaByCI(
+        responseCircuito.data.secretarioMesaCI
+      );
+      const responseVocal = await getVocalMesaByCI(
+        responseCircuito.data.vocalMesaCI
+      );
 
       setPresidente(responsePresidente.data);
       setSecretario(responseSecretario.data);
       setVocal(responseVocal.data);
-    } 
-    catch (error) {
+    } catch (error) {
       console.error("Error fetching Miembros Mesa:", error);
     }
   };
@@ -47,14 +69,31 @@ function ManageMiembrosMesa() {
 
   const handleAddMiembrosMesaToCircuito = async (e) => {
     e.preventDefault();
+
+    if (
+      presidenteCI === secretarioCI ||
+      presidenteCI === vocalCI ||
+      secretarioCI === vocalCI
+    ) {
+      setErrorDialogOpen(true);
+      return;
+    }
+
     try {
-      await addMiembrosMesaToCircuito(presidenteCI, secretarioCI, vocalCI, eleccionId, numero);
-      await fetchMiembrosMesa(); 
+      await addMiembrosMesaToCircuito(
+        presidenteCI,
+        secretarioCI,
+        vocalCI,
+        eleccionId,
+        numero
+      );
+      await fetchMiembrosMesa();
     } 
     catch (error) {
       console.error("Error al agregar miembros:", error);
     }
   };
+
   return (
     <div>
       <NavBar />
@@ -99,10 +138,17 @@ function ManageMiembrosMesa() {
         <div className="mt-18">
           <Popover>
             <PopoverTrigger asChild>
-              <ButtonCustom disabled={presidente && secretario && vocal}  label="Agregar Miembros" size="large" />
+              <ButtonCustom
+                disabled={presidente && secretario && vocal}
+                label="Agregar Miembros"
+                size="large"
+              />
             </PopoverTrigger>
             <PopoverContent className="w-80 flex flex-col items-center shadow-2xl border-2 border-blue-900">
-              <form onSubmit={handleAddMiembrosMesaToCircuito} className="w-full flex flex-col gap-2">
+              <form
+                onSubmit={handleAddMiembrosMesaToCircuito}
+                className="w-full flex flex-col gap-2"
+              >
                 <input
                   id="presidenteCI"
                   type="number"
@@ -135,11 +181,27 @@ function ManageMiembrosMesa() {
             </PopoverContent>
           </Popover>
         </div>
-
       </div>
+      <AlertDialog open={errorDialogOpen} onOpenChange={setErrorDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Error de Validacion</AlertDialogTitle>
+            <AlertDialogDescription>
+              Todos lass CI deben ser distintas entre si.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction
+              className="bg-red-500 cursor-pointer hover:bg-red-700"
+              onClick={() => setErrorDialogOpen(false)}
+            >
+              Cerrar
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
 
 export default ManageMiembrosMesa;
-

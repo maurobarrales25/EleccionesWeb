@@ -64,7 +64,8 @@ function EleccionesPage() {
               <TableRow key={eleccionId}>
                 <TableCell>
                 {(baseLink === "/ResultsPage" && habilitado === false) ||
-                  ((baseLink === "/FindCircuitoPage" || baseLink === "/ManageEleccion") && habilitado === true) ||
+                  (baseLink === "/FindCircuitoPage" && habilitado === true) ||
+                  (baseLink === "/ManageEleccion" && habilitado !== false) ||
                   (baseLink !== "/ResultsPage" && baseLink !== "/FindCircuitoPage" && baseLink !== "/ManageEleccion") ? (
                     <Link
                       to={{
