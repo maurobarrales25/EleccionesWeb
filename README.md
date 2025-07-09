@@ -1,12 +1,41 @@
-# React + Vite
+# Proyecto Frontend Base de datos II
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Tecnologias
 
-Currently, two official plugins are available:
+- [React.js + Vite](https://react.dev/)
+- [React Router Dom](https://www.npmjs.com/package/react-router-dom)
+- [Tailwind CSS](https://tailwindcss.com/)
+- React Icons
+- [Axios](https://axios-http.com/es/docs/intro)
+- [Shadcn UI](https://ui.shadcn.com/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Instalacion
 
-## Expanding the ESLint configuration
+### Requerimientos ✔️
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- IDE que mas te guste
+- [Node.js](https://nodejs.org/en)
+- Gestor de paquetes node que mas te guste, de demostracion [npm](https://www.npmjs.com/)
+- [Git](https://git-scm.com/)
+
+### Clonar el repositorio
+
+<pre><code class="python">git clone https://github.com/maurobarrales25/EleccionesWeb.git</code></pre>
+
+### Instalar dependencias
+
+<pre><code class="python">npm install</code></pre>
+
+### Run
+
+Ingresar en la terminal:
+
+<pre><code class="python">npm run dev</code></pre>
+
+## Open 🚀
+
+En el buscador abrir :
+
+<pre><code class="python">http://localhost:5173/</code></pre>
+
+### PD: Se recomienda tener el back corriendo 😐
