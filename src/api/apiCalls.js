@@ -30,8 +30,8 @@ export const setCredencialCircuito = (data) => {
     return axios.post(BASE_URL + `CredencialCircuito/save`, data)
 }
 
-export const getDepartamentoByCircuitoNumero = (numero) => {
-    return axios.get(BASE_URL + `circuito/getDepartamentoByCircuitoNumero`, {params:{numero}})
+export const getDepartamentoByCircuitoNumero = (numero, eleccionId) => {
+    return axios.get(BASE_URL + `circuito/getDepartamentoByCircuitoNumero`, {params:{numero, eleccionId}})
 }
 
 export const saveEleccion = (nombre, tipoEleccion) => {
@@ -178,4 +178,14 @@ export const getGanadoresDepartamento = (eleccionId) => {
     return axios.get(BASE_URL + "resultados/getGanadoresDepartamento", { params: { eleccionId } });
 }
 
+export const getCredenciales = () => {
+    return axios.get(BASE_URL + 'credencial/all');
+}
 
+export const getCredencialesBySerie = (serie) => {
+    return axios.get(BASE_URL + 'credencial/allBySerie', { params: { serie } });
+}
+
+export const saveCredencialCircuito = (serie, numero, eleccionId, circuitoNumero, participo) => {
+    return axios.post(BASE_URL + 'CredencialCircuito/save', { serie, numero, eleccionId, circuitoNumero, participo } );
+}

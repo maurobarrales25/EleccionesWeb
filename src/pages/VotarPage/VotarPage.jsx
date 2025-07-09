@@ -39,7 +39,7 @@ export default function VotarPage() {
 
     const handleGetLists = async() => {
         try {
-            const responseDepartamento = await getDepartamentoByCircuitoNumero(circuitoNumero)
+            const responseDepartamento = await getDepartamentoByCircuitoNumero(circuitoNumero, eleccionId)
             setDepartamento(responseDepartamento.data)
 
             const response = await getListasByEleccionAndDepartamento(eleccionId, responseDepartamento.data.departamentoId)

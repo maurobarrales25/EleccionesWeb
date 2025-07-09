@@ -109,7 +109,6 @@ function EleccionesPage() {
                 <select value={selectTipoEleccion} onChange={(e) => setSelectTipoEleccion(e.target.value)} required className="border-4 rounded-md p-2 outline-0">
                   <option value="" disabled>Seleccione tipo de eleccion</option>
                   <option value="PRESIDENCIAL">PRESIDENCIAL</option>
-                  <option value="BALLOTAGE">BALLOTAGE</option>
                 </select>
 
                 <ButtonCustom label="Crear" size="small"></ButtonCustom>
