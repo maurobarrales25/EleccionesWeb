@@ -1,0 +1,76 @@
+.boton {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 1rem 1.5rem; /* 16px 24px */
+  font-size: 1rem; /* 16px */
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0.03rem;
+  background-color: #4C5C92;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2); /* 2px 4px */
+  min-width: 11.25rem; /* 180px */
+  height: 3.5rem; /* 56px */
+}
+
+.boton:hover {
+  background-color: #3F4A7A ;
+}
+
+.boton:active {
+  background-color: #353E66;
+}
+
+.boton.disabled {
+  background-color: #9399b6;
+  cursor: not-allowed;
+}
+
+
+.boton.small {
+  padding: 0.625rem 1rem; /* 10px 16px */
+  font-size: 0.875rem; /* 14px */
+  height: 2.5rem; /* 40px */
+  min-width: 7.5rem; /* 120px */
+}
+
+.boton.large {
+  height: 4rem; /* 64px */
+  min-width: 15.625rem; /* 250px */
+  font-size: 1.125rem; /* 18px */
+}
+
+
+.boton.xl {
+  height: 6rem; /* 64px */
+  min-width: 20rem; /* 250px */
+  font-size: 1.125rem; /* 18px */
+}
+
+.boton.full {
+  width: 100%;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.5rem;
+  font-size: 1.1rem; /* o adaptalo si querés escalar */
+}
+
+
+
+
+
+
+
+
+
+
+
+
