@@ -4,7 +4,17 @@ import NavBar from "@/components/NavBar/NavBar";
 import { Table, TableRow, TableHead, TableHeader, TableBody, TableCell } from '@/Components/ui/table';
 import { useUser } from "@/context/UserContext";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogAction,
+} from "@/components/ui/alert-dialog";
+
 
 export default function VotarPage() {
 
@@ -14,6 +24,8 @@ export default function VotarPage() {
     const [ participacion, setParticipacion ] = useState(false)
     const [ departamento, setDepartamento ] = useState({})
     const { eleccionId, circuitoNumero } = useParams()
+    const [ votaste, setVotaste ] = useState(false)
+    const navigate = useNavigate()
 
     useEffect(() => {
         handleGetLists()
@@ -52,7 +64,7 @@ export default function VotarPage() {
     const handleVotar = async() => {
         const listaSeleccionada = lists[selectedVote]
         if (selectedVote === "blanco") {
-            await saveVoto(eleccionId, circuitoNumero, null, true, null, departamento.departamentoId)
+            await saveVoto(eleccionId, circuitoNumero, null, null, null, departamento.departamentoId)
             await updateParticipacion(ciudadano.serieCredencial, ciudadano.numeroCredencial, eleccionId, circuitoNumero)
         }
         else {
@@ -60,6 +72,10 @@ export default function VotarPage() {
             await saveVoto(eleccionId, circuitoNumero, numeroLista, null, listaSeleccionada.cedulaIdentidad, departamento.departamentoId)
             await updateParticipacion(ciudadano.serieCredencial, ciudadano.numeroCredencial, eleccionId, circuitoNumero)
         }
+
+        setTimeout(() => {
+            setVotaste(true)
+        },400)
     }
 
     return(
@@ -140,6 +156,21 @@ export default function VotarPage() {
                     </div>
                 </div>
                 )}
+                <AlertDialog open={votaste}>
+                    <AlertDialogContent>
+                        <AlertDialogHeader>
+                            <AlertDialogTitle>Voto realizado correctamente</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                Muchas gracias por votar en la eleccion: {eleccionId}
+                                </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter> 
+                            <AlertDialogAction className="bg-green-500 cursor-pointer hover:bg-green-700" onClick={() => navigate("/Elecciones", {state:{baseLink:"/FindCircuitoPage"}})}>
+                            Aceptar
+                            </AlertDialogAction>
+                        </AlertDialogFooter>
+                    </AlertDialogContent>
+                </AlertDialog>
             </div>
     )
 }
